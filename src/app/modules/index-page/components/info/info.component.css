@@ -1,0 +1,11 @@
+.info-container {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.info-container img {
+    width: 100%;
+    height: auto;
+}

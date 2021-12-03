@@ -6,11 +6,18 @@
     overflow: hidden;
 }
 
-.background-image img {
+img.bg-1 {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+img.bg-2 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
 }
 
 .cover-title {

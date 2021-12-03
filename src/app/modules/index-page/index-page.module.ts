@@ -5,6 +5,7 @@ import { IndexPageRoutingModule } from './index-page-routing.module';
 import { CoverComponent } from './components/cover/cover.component';
 import { AboutComponent } from './components/about/about.component';
 import { InfoComponent } from './components/info/info.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 
 
@@ -13,7 +14,8 @@ import { InfoComponent } from './components/info/info.component';
     IndexComponent,
     CoverComponent,
     AboutComponent,
-    InfoComponent
+    InfoComponent,
+    ContactComponent
   ],
   imports: [
     CommonModule,

@@ -6,6 +6,7 @@ import { CoverComponent } from './components/cover/cover.component';
 import { AboutComponent } from './components/about/about.component';
 import { InfoComponent } from './components/info/info.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -19,7 +20,8 @@ import { ContactComponent } from './components/contact/contact.component';
   ],
   imports: [
     CommonModule,
-    IndexPageRoutingModule
+    IndexPageRoutingModule,
+    FontAwesomeModule
   ],
   bootstrap: [
     IndexComponent

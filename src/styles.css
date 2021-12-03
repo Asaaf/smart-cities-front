@@ -1,1 +1,60 @@
-/* You can add global styles to this file, and also import other style files */
+/* MONTSERRAT FONT */
+
+@font-face {
+    font-family: "Montserrat Regular";
+    src: url("assets/fonts/montserrat/Montserrat-Regular.ttf"), url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+}
+
+@font-face {
+    font-family: "Montserrat Medium";
+    src: url("assets/fonts/montserrat/Montserrat-Medium.ttf"), url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+}
+
+@font-face {
+    font-family: "Montserrat Black";
+    src: url("assets/fonts/montserrat/Montserrat-Black.ttf"), url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
+}
+
+@font-face {
+    font-family: "Montserrat Light";
+    src: url("assets/fonts/montserrat/Montserrat-Light.ttf"), url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+}
+
+
+/* OPEN SANS FONT */
+
+@font-face {
+    font-family: "Open Sans Regular";
+    src: url("assets/fonts/open_sans/OpenSans-Regular.ttf"), url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+}
+
+@font-face {
+    font-family: "Open Sans Bold";
+    src: url("assets/fonts/open_sans/OpenSans-Bold.ttf"), url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
+}
+
+:root {
+    /* DOMINANT COLORS */
+    --d-color-1: #FFFFFF;
+    --d-color-2: rgb(59, 59, 59);
+    /* RECESSIVES COLORS */
+    --r-color-1-blue: #0F4896;
+    --r-color-2-orange: #E46802;
+    --r-color-3-blue-green: #018989;
+    --r-color-4-yellow: #E49102;
+    --r-color-5-light-gray: rgb(236, 236, 236);
+    --r-color-5-dark-gray: rgb(204, 204, 204);
+    /* TITLES FONT */
+    --title-font-1: "Montserrat Black";
+    --title-font-2: "Montserrat Medium";
+    --title-font-3: "Montserrat Regular";
+    --title-font-4: "Montserrat Light";
+    /* BODY FONT */
+    --body-font-1: "Open Sans Regular";
+    --body-font-2: "Open Sans Bold";
+}
+
+body {
+    font-family: var(--body-font-1);
+    letter-spacing: 0.5px;
+}

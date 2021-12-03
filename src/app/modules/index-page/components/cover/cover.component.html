@@ -1,0 +1,11 @@
+<div class="cover-container">
+    <div class="cover-title">
+        <h1>
+            <span *ngFor="let letter of title" class="letter" [@letterAnimation]="letterAnimation">{{letter}}</span>
+        </h1>
+        <h3>Ciudades Inteligentes</h3>
+    </div>
+    <div class="background-image">
+        <img src="./assets/background.png">
+    </div>
+</div>

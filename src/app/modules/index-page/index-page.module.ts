@@ -4,6 +4,7 @@ import { IndexComponent } from './components/index/index.component';
 import { IndexPageRoutingModule } from './index-page-routing.module';
 import { CoverComponent } from './components/cover/cover.component';
 import { AboutComponent } from './components/about/about.component';
+import { InfoComponent } from './components/info/info.component';
 
 
 
@@ -11,7 +12,8 @@ import { AboutComponent } from './components/about/about.component';
   declarations: [
     IndexComponent,
     CoverComponent,
-    AboutComponent
+    AboutComponent,
+    InfoComponent
   ],
   imports: [
     CommonModule,

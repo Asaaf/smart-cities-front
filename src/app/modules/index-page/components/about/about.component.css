@@ -1,0 +1,38 @@
+.container-about {
+    overflow: hidden;
+}
+
+.section-1,
+.section-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    margin: 39px 10%;
+}
+
+.section-1 .description,
+.section-2 .description {
+    text-align: justify;
+}
+
+.section-1 .title,
+.section-2 .title {
+    width: 60%;
+    padding: 6px 15px;
+    font-size: 30px;
+    background: var(--r-color-1-blue);
+    color: var(--d-color-1);
+    font-family: var(--title-font-1);
+}
+
+.section-1 .title {
+    margin-left: calc(-10% - 15px);
+    margin-bottom: 30px;
+}
+
+.section-2 .title {
+    margin-left: calc((40% - 30px) + (10% + 15px));
+    margin-bottom: 30px;
+}

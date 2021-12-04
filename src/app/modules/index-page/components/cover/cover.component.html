@@ -1,24 +1,37 @@
 <div class="cover-container">
+
+    <!-- MENU BAR -->
     <div [ngClass]="menu?'bar hidden':'bar'" (click)="showMenu()">
         <fa-icon [icon]="faBars"></fa-icon>
     </div>
+
+    <!-- MENU -->
     <div [ngClass]="menu?'menu':'menu hidden'">
         <div [ngClass]="menu?'times':'times hidden'" (click)="showMenu()">
             <fa-icon [icon]="faTimes"></fa-icon>
         </div>
         <ul>
-            <li>FORMULARIO</li>
+            <li routerLink="/formulario">FORMULARIO</li>
             <li>DATOS</li>
         </ul>
     </div>
+
+    <!-- TITLE / SUBTITLE -->
     <div class="cover-title">
         <h1>
             <span *ngFor="let letter of title" class="letter" [@letterAnimation]="letterAnimation">{{letter}}</span>
         </h1>
         <h3>Ciudades Inteligentes</h3>
     </div>
+
+    <!-- LOGO -->
+    <div class="logo">
+        <img src="./assets/images/logo.png" alt="logo victoria">
+    </div>
+
+    <!-- BACKGROUND IMAGE -->
     <div class="background-image">
-        <img src="./assets/images/cover-background-1.png" class="bg-1">
-        <img src="./assets/images/cover-background-2.svg" class="bg-2">
+        <img src="./assets/images/cover-background-1.png" class="bg-1" alt="Fondo Victoria">
+        <img src="./assets/images/cover-background-2.svg" class="bg-2" alt="Decoración Fondo Victoria">
     </div>
 </div>

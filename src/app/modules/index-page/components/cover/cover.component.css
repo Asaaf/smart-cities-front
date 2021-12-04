@@ -6,6 +6,21 @@
     overflow: hidden;
 }
 
+.logo {
+    position: absolute;
+    z-index: 1;
+    width: 160px;
+    height: auto;
+    overflow: hidden;
+    top: 21px;
+    left: 21px;
+}
+
+.logo img {
+    width: 100%;
+    height: auto;
+}
+
 img.bg-1 {
     position: absolute;
     top: 50%;
@@ -67,6 +82,7 @@ span.letter {
 .times {
     position: absolute;
     z-index: 1;
+    top: 21px;
     right: 21px;
     font-size: 30px;
     cursor: pointer;
@@ -85,7 +101,7 @@ span.letter {
 .menu {
     position: fixed;
     right: 0;
-    z-index: 1;
+    z-index: 3;
     width: 100%;
     height: 100vh;
     transition: all 0.3s linear;
@@ -98,7 +114,7 @@ span.letter {
     margin: 0;
     padding: 0;
     left: 50%;
-    top: 50%;
+    top: 60%;
     transform: translate(-50%, -50%);
 }
 

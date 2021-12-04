@@ -61,3 +61,32 @@ body {
     margin: 0;
     padding: 0;
 }
+
+
+/* width */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+/* Track */
+
+ ::-webkit-scrollbar-track {
+    background: var(--r-color-5-light-gray);
+}
+
+
+/* Handle */
+
+ ::-webkit-scrollbar-thumb {
+    background: var(--r-color-3-blue-green);
+    transition: all 0.3s linear;
+}
+
+
+/* Handle on hover */
+
+ ::-webkit-scrollbar-thumb:hover {
+    background: var(--r-color-1-blue);
+}

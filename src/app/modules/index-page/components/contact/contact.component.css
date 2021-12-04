@@ -1,10 +1,9 @@
 .map {
-    width: calc(80% - 2px);
+    width: 80%;
     height: 300px;
     margin: 10% 0px 0px 20%;
     border-radius: 18px;
     overflow: hidden;
-    border: 1px solid var(--r-color-5-dark-gray);
 }
 
 .contact-section {
@@ -53,4 +52,12 @@
     display: inline-block;
     left: 0;
     bottom: 27px;
+}
+
+.copy {
+    background: var(--d-color-2);
+    text-align: center;
+    color: white;
+    font-size: 12px;
+    padding: 3px 0px;
 }

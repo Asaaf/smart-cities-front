@@ -1,4 +1,16 @@
 <div class="cover-container">
+    <div [ngClass]="menu?'bar hidden':'bar'" (click)="showMenu()">
+        <fa-icon [icon]="faBars"></fa-icon>
+    </div>
+    <div [ngClass]="menu?'menu':'menu hidden'">
+        <div [ngClass]="menu?'times':'times hidden'" (click)="showMenu()">
+            <fa-icon [icon]="faTimes"></fa-icon>
+        </div>
+        <ul>
+            <li>FORMULARIO</li>
+            <li>DATOS</li>
+        </ul>
+    </div>
     <div class="cover-title">
         <h1>
             <span *ngFor="let letter of title" class="letter" [@letterAnimation]="letterAnimation">{{letter}}</span>

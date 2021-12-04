@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { indexAnimations } from './animations';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-cover',
@@ -8,10 +10,13 @@ import { indexAnimations } from './animations';
   animations: [indexAnimations.titleAnimation]
 })
 export class CoverComponent implements OnInit, AfterViewInit {
+  faBars = faBars;
+  faTimes = faTimes;
   letterAnimation: string = "compressed";
   title: string[] = "PILOTO".split("");
   loading: boolean = true;
   animation: any;
+  menu: boolean = false;
 
   constructor() { }
 
@@ -31,6 +36,10 @@ export class CoverComponent implements OnInit, AfterViewInit {
         }
       }
     }, 2000);
+  }
+
+  showMenu() {
+    this.menu = !this.menu;
   }
 
 }

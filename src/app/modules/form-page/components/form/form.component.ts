@@ -6,6 +6,7 @@ import { Transport } from 'src/app/models/transport/transport';
 import { ActivityService } from 'src/app/services/activity/activity.service';
 import { CityService } from 'src/app/services/city/city.service';
 import { CountryService } from 'src/app/services/country/country.service';
+import { PlaceService } from 'src/app/services/place/place.service';
 import { ProvinceService } from 'src/app/services/province/province.service';
 import { TouristService } from 'src/app/services/tourist/tourist.service';
 import { TransportService } from 'src/app/services/transport/transport.service';
@@ -28,6 +29,7 @@ export class FormComponent implements OnInit {
   citiesList: any;
   transportsList: any;
   activitiesList: any;
+  placesList: any;
 
   countrySelected: Country = new Country();
   provinceSelected: Province = new Province();
@@ -41,13 +43,15 @@ export class FormComponent implements OnInit {
     private provinceService: ProvinceService,
     private touristService: TouristService,
     private transportService: TransportService,
-    private activityService: ActivityService
+    private activityService: ActivityService,
+    private placeService: PlaceService
   ) { }
 
   ngOnInit(): void {
     this.getCountries();
     this.getTransports();
     this.getActivities();
+    this.getPlaces();
     this.maxDate();
   }
 
@@ -110,6 +114,17 @@ export class FormComponent implements OnInit {
     this.activityService.getActivities()?.subscribe(
       resp => {
         this.activitiesList = resp;
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  getPlaces() {
+    this.placeService.getPlaces()?.subscribe(
+      resp => {
+        this.placesList = resp;
       },
       error => {
         console.log(error);

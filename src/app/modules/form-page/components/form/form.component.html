@@ -69,16 +69,20 @@
     </div>
     <div class="form-group">
         <span class="subtitle">¿Qué sitios turísticos has visitado?</span>
-        <div class="activity-container">
-            <label for="activity" *ngFor="let activity of activitiesList" class="activity-label">
-                {{activity.name}}
-                <input type="checkbox" name="activity" id="activity" value="{{activity.id}}">
+        <div class="place-container">
+            <label for="place" *ngFor="let place of placesList" class="places-label">
+                {{place.name}}
+                <input type="checkbox" name="place" id="place" value="{{place.id}}">
                 <span class="checkmark"></span>
             </label>
         </div>
     </div>
     <div class="form-group buttons">
         <input type="button" value="Atrás" class="btn-back" (click)="nextStep(2)">
-        <input type="button" value="Siguiente" class="btn-next" (click)="nextStep(4)">
+        <input type="button" value="Enviar" class="btn-next" (click)="nextStep(4)">
     </div>
 </form>
+
+<div [ngClass]="step==4?'step-4':'step-4 hidden'">
+    <p>¡Felicidades! Hemos enviado tu foto al correo electrónico.</p>
+</div>

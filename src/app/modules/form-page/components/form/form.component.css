@@ -1,4 +1,26 @@
+form.step-1,
+form.step-2 {
+    position: relative;
+    opacity: 1;
+    transition: all 0.3s linear;
+    z-index: 1;
+}
+
+form.step-1.hidden,
+form.step-2.hidden {
+    position: absolute;
+    width: 80%;
+    height: 100%;
+    margin: 10%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: all 0.3s linear;
+    z-index: 0;
+}
+
 .form-group {
+    position: relative;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -13,8 +35,8 @@ h1.title {
 }
 
 .header {
-    width: 40%;
-    margin: 0px 30% 54px 30%;
+    width: 50%;
+    margin: 0px 25% 54px 25%;
 }
 
 h3.subtitle {
@@ -35,12 +57,116 @@ h3.subtitle::after {
     background-color: var(--d-color-2);
 }
 
-input#email {
+input#email,
+input#birthdate,
+input#country,
+input#province,
+input#city,
+input#travel_modes {
     text-align: center;
     font-size: 25px;
     border-radius: 6px;
     border: 0;
-    padding: 6px 0px;
+    padding: 3px 0px;
     outline: none;
     font-family: var(--body-font-1);
+    letter-spacing: 3px;
+    margin: 12px 0px;
+}
+
+.terms {
+    text-align: center;
+    padding: 12px 0px;
+    font-family: var(--body-font-2);
+    font-size: 13px;
+}
+
+.form-group.buttons {
+    flex-direction: row;
+}
+
+input.btn-next,
+input.btn-back {
+    margin: 0px 25%;
+    font-size: 24px;
+    background: var(--r-color-2-orange);
+    background: radial-gradient(circle, var(--r-color-4-yellow) 0%, var(--r-color-2-orange) 100%);
+    border: 0;
+    font-family: var(--title-font-2);
+    color: var(--d-color-1);
+    padding: 6px 0px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 8px #00000085;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: all 0.3s linear;
+}
+
+input.btn-next:hover,
+input.btn-back:hover {
+    opacity: 1;
+}
+
+input.btn-back {
+    background: var(--r-color-1-blue);
+    background: radial-gradient(circle, var(--r-color-1-blue) 0%, var(--r-color-3-blue-green) 100%);
+}
+
+.form-group.buttons .btn-next,
+.form-group.buttons .btn-back {
+    margin: 18px auto 0px;
+    width: 171px;
+}
+
+.countries-list,
+.provinces-list,
+.cities-list {
+    background: var(--d-color-1);
+    border-radius: 6px;
+    position: absolute;
+    width: 100%;
+    top: 60px;
+    transition: all 0.3s linear;
+    z-index: 1;
+    max-height: 250px;
+    overflow: auto;
+    box-shadow: 0px 4px 10px #0000004f;
+}
+
+.countries-list.hidden,
+.provinces-list.hidden,
+.cities-list.hidden {
+    height: 0px;
+    overflow: hidden;
+    transition: all 0.3s linear;
+}
+
+.countries-list ul,
+.provinces-list ul,
+.cities-list ul {
+    display: flex;
+    margin: 0;
+    list-style: none;
+    padding: 0;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: stretch;
+    justify-content: space-around;
+    align-items: stretch;
+}
+
+li.country,
+li.province,
+li.city {
+    padding: 3px 0px;
+    text-align: center;
+    cursor: pointer;
+}
+
+li.country:hover,
+li.province:hover,
+li.city:hover {
+    background: var(--r-color-1-blue);
+    background: radial-gradient(circle, var(--r-color-1-blue) 0%, var(--r-color-3-blue-green) 100%);
+    color: var(--d-color-1);
 }

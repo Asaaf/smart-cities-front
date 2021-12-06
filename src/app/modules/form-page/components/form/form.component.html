@@ -16,7 +16,7 @@
 
 <form [ngClass]="step==2?'step-2':'step-2 hidden'">
     <div class="form-group">
-        <input type="text" name="birthdate" id="birthdate" placeholder="Fecha de nacimiento" onfocus="(this.type='date')" onfocusout="(this.type='text')">
+        <input type="text" name="birthdate" id="birthdate" placeholder="Fecha de nacimiento" onfocus="(this.type='date')" onfocusout="(this.type='text')" type='date' min='1899-01-01' max='{{maxBirthdate}}'>
     </div>
     <div class="form-group">
         <input type="text" name="country" id="country" placeholder="País de procedencia" (click)="showCountries()" value="{{countrySelected.name}}" readonly>
@@ -58,13 +58,27 @@
 
 <form [ngClass]="step==3?'step-3':'step-3 hidden'">
     <div class="form-group">
-        <label for="activities">¿Qué actividades turísticas son de tu interés?</label>
-        <div class="activities" id="activities">
-            <input type="checkbox" name="" id="">
+        <span class="subtitle">¿Qué actividades turísticas son de tu interés?</span>
+        <div class="activity-container">
+            <label for="activity" *ngFor="let activity of activitiesList" class="activity-label">
+                {{activity.name}}
+                <input type="checkbox" name="activity" id="activity" value="{{activity.id}}">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <span class="subtitle">¿Qué sitios turísticos has visitado?</span>
+        <div class="activity-container">
+            <label for="activity" *ngFor="let activity of activitiesList" class="activity-label">
+                {{activity.name}}
+                <input type="checkbox" name="activity" id="activity" value="{{activity.id}}">
+                <span class="checkmark"></span>
+            </label>
         </div>
     </div>
     <div class="form-group buttons">
-        <input type="button" value="Atrás" class="btn-back" (click)="nextStep(1)">
-        <input type="button" value="Siguiente" class="btn-next" (click)="nextStep(3)">
+        <input type="button" value="Atrás" class="btn-back" (click)="nextStep(2)">
+        <input type="button" value="Siguiente" class="btn-next" (click)="nextStep(4)">
     </div>
 </form>

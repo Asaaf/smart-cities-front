@@ -3,6 +3,7 @@ import { City } from 'src/app/models/city/city';
 import { Country } from 'src/app/models/country/country';
 import { Province } from 'src/app/models/province/province';
 import { Transport } from 'src/app/models/transport/transport';
+import { ActivityService } from 'src/app/services/activity/activity.service';
 import { CityService } from 'src/app/services/city/city.service';
 import { CountryService } from 'src/app/services/country/country.service';
 import { ProvinceService } from 'src/app/services/province/province.service';
@@ -26,23 +27,28 @@ export class FormComponent implements OnInit {
   provincesList: any;
   citiesList: any;
   transportsList: any;
+  activitiesList: any;
 
   countrySelected: Country = new Country();
   provinceSelected: Province = new Province();
   citySelected: City = new City();
   transportSelected: Transport = new Transport();
+  maxBirthdate: string = "";
 
   constructor(
     private countryService: CountryService,
     private cityService: CityService,
     private provinceService: ProvinceService,
     private touristService: TouristService,
-    private transportService: TransportService
+    private transportService: TransportService,
+    private activityService: ActivityService
   ) { }
 
   ngOnInit(): void {
     this.getCountries();
     this.getTransports();
+    this.getActivities();
+    this.maxDate();
   }
 
   getCountries() {
@@ -98,6 +104,17 @@ export class FormComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  getActivities() {
+    this.activityService.getActivities()?.subscribe(
+      resp => {
+        this.activitiesList = resp;
+      },
+      error => {
+        console.log(error);
+      }
+    )
   }
 
   nextStep(step: number) {
@@ -160,6 +177,21 @@ export class FormComponent implements OnInit {
     this.showTransportsList = false;
   }
 
-  
+  maxDate() {
+    let today: any = new Date();
+    let dd: any = today.getDate();
+    let mm: any = today.getMonth() + 1;
+    let yyyy: any = today.getFullYear();
+
+    if (dd < 10) {
+      dd = '0' + dd;
+    }
+
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
+
+    this.maxBirthdate = yyyy + '-' + mm + '-' + dd;
+  }
 
 }

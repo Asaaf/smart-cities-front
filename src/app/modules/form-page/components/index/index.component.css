@@ -4,7 +4,7 @@
     height: 100vh;
     overflow: hidden;
     background: var(--r-color-1-blue);
-    background: linear-gradient(330deg, var(--r-color-1-blue) 0%, var(--d-color-1) 100%);
+    background: linear-gradient( 330deg, var(--r-color-1-blue) -35%, var(--d-color-1) 100%);
 }
 
 .background-image img {

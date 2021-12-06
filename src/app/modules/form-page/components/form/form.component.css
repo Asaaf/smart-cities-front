@@ -10,15 +10,7 @@ form.step-3 {
 form.step-1.hidden,
 form.step-2.hidden,
 form.step-3.hidden {
-    position: absolute;
-    width: 80%;
-    height: 100%;
-    margin: 10%;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    transition: all 0.3s linear;
-    z-index: 0;
+    display: none;
 }
 
 .form-group {
@@ -66,7 +58,7 @@ input#province,
 input#city,
 input#travel_modes {
     text-align: center;
-    font-size: 25px;
+    font-size: 21px;
     border-radius: 6px;
     border: 0;
     padding: 3px 0px;
@@ -138,7 +130,7 @@ li.province:hover,
 li.city:hover,
 li.transport:hover {
     background: var(--r-color-1-blue);
-    background: radial-gradient(circle, var(--r-color-1-blue) 0%, var(--r-color-3-blue-green) 100%);
+    background: linear-gradient(50deg, var(--r-color-1-blue) 0%, var(--r-color-3-blue-green) 100%);
     color: var(--d-color-1);
 }
 
@@ -149,32 +141,115 @@ li.transport:hover {
 input.btn-next,
 input.btn-back {
     margin: 0px 25%;
-    font-size: 24px;
+    font-size: 21px;
     background: var(--r-color-2-orange);
-    background: radial-gradient(circle, var(--r-color-4-yellow) 0%, var(--r-color-2-orange) 100%);
+    background: linear-gradient(50deg, var(--r-color-1-blue) 0%, var(--r-color-3-blue-green) 100%);
     border: 0;
     font-family: var(--title-font-2);
     color: var(--d-color-1);
     padding: 6px 0px;
     border-radius: 8px;
-    box-shadow: 0px 0px 8px #00000085;
+    box-shadow: 0px 0px 3px #00000085;
     cursor: pointer;
-    opacity: 0.8;
+    border: 2px solid var(--d-color-1);
+    opacity: 0.7;
     transition: all 0.3s linear;
 }
 
-input.btn-next:hover,
-input.btn-back:hover {
+input.btn-next:hover {
     opacity: 1;
+    background: linear-gradient(50deg, var(--r-color-4-yellow) 0%, var(--r-color-2-orange) 100%);
 }
 
 input.btn-back {
-    background: var(--r-color-1-blue);
-    background: radial-gradient(circle, var(--r-color-1-blue) 0%, var(--r-color-3-blue-green) 100%);
+    color: var(--d-color-2);
+    background: var(--r-color-5-light-gray);
+    background: linear-gradient(50deg, var(--r-color-5-light-gray) 0%, var(--r-color-5-dark-gray) 100%);
+}
+
+input.btn-back:hover {
+    opacity: 1;
 }
 
 .form-group.buttons .btn-next,
 .form-group.buttons .btn-back {
     margin: 18px auto 0px;
     width: 171px;
+}
+
+span.subtitle {
+    text-align: center;
+    font-family: var(--title-font-2);
+    font-size: 21px;
+}
+
+label.activity-label {
+    width: auto;
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin: 6px;
+    cursor: pointer;
+    font-size: 21px;
+    text-transform: capitalize;
+}
+
+label.activity-label input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: var(--d-color-1);
+}
+
+label.activity-label input~.checkmark {
+    background-color: var(--d-color-1);
+}
+
+label.activity-label input:checked~.checkmark {
+    background-color: var(--r-color-2-orange);
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+label.activity-label input:checked~.checkmark:after {
+    display: block;
+}
+
+label.activity-label .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.activity-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 24px 0px;
 }

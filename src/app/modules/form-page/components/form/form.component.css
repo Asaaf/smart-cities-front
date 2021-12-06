@@ -1,0 +1,46 @@
+.form-group {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+h1.title {
+    text-align: center;
+    margin: 0;
+    font-family: var(--title-font-1);
+}
+
+.header {
+    width: 40%;
+    margin: 0px 30% 54px 30%;
+}
+
+h3.subtitle {
+    position: relative;
+    text-align: center;
+    margin: 0;
+    font-family: var(--title-font-4);
+    letter-spacing: 9px;
+}
+
+h3.subtitle::after {
+    content: "";
+    position: absolute;
+    bottom: -9px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--d-color-2);
+}
+
+input#email {
+    text-align: center;
+    font-size: 25px;
+    border-radius: 6px;
+    border: 0;
+    padding: 6px 0px;
+    outline: none;
+    font-family: var(--body-font-1);
+}

@@ -1,8 +1,8 @@
+<div class="header">
+    <h1 class="title">TU FOTO</h1>
+    <h3 class="subtitle">AL CORREO</h3>
+</div>
 <form [ngClass]="step==1?'step-1':'step-1 hidden'">
-    <div class="header">
-        <h1 class="title">TU FOTO</h1>
-        <h3 class="subtitle">AL CORREO</h3>
-    </div>
     <div class="form-group">
         <input type="email" name="email" id="email" placeholder="Correo">
     </div>
@@ -14,11 +14,7 @@
     </div>
 </form>
 
-<form method="post" [ngClass]="step==2?'step-2':'step-2 hidden'">
-    <div class="header">
-        <h1 class="title">TU FOTO</h1>
-        <h3 class="subtitle">AL CORREO</h3>
-    </div>
+<form [ngClass]="step==2?'step-2':'step-2 hidden'">
     <div class="form-group">
         <input type="text" name="birthdate" id="birthdate" placeholder="Fecha de nacimiento" onfocus="(this.type='date')" onfocusout="(this.type='text')">
     </div>
@@ -47,7 +43,25 @@
         </div>
     </div>
     <div class="form-group">
-        <input type="text" name="travel_modes" id="travel_modes" placeholder="Modo de viaje" readonly>
+        <input type="text" name="travel_modes" id="travel_modes" placeholder="Modo de viaje" (click)="showTransports()" value="{{transportSelected.name}}" readonly>
+        <div [ngClass]="showTransportsList?'transports-list':'transports-list hidden'">
+            <ul>
+                <li class="transport" *ngFor="let transport of transportsList" (click)="selectTransport(transport)">{{transport.name}}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="form-group buttons">
+        <input type="button" value="Atrás" class="btn-back" (click)="nextStep(1)">
+        <input type="button" value="Siguiente" class="btn-next" (click)="nextStep(3)">
+    </div>
+</form>
+
+<form [ngClass]="step==3?'step-3':'step-3 hidden'">
+    <div class="form-group">
+        <label for="activities">¿Qué actividades turísticas son de tu interés?</label>
+        <div class="activities" id="activities">
+            <input type="checkbox" name="" id="">
+        </div>
     </div>
     <div class="form-group buttons">
         <input type="button" value="Atrás" class="btn-back" (click)="nextStep(1)">

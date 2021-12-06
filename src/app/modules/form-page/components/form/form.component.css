@@ -1,5 +1,6 @@
 form.step-1,
-form.step-2 {
+form.step-2,
+form.step-3 {
     position: relative;
     opacity: 1;
     transition: all 0.3s linear;
@@ -7,7 +8,8 @@ form.step-2 {
 }
 
 form.step-1.hidden,
-form.step-2.hidden {
+form.step-2.hidden,
+form.step-3.hidden {
     position: absolute;
     width: 80%;
     height: 100%;
@@ -81,6 +83,65 @@ input#travel_modes {
     font-size: 13px;
 }
 
+.countries-list,
+.provinces-list,
+.cities-list,
+.transports-list {
+    background: var(--d-color-1);
+    border-radius: 6px;
+    position: absolute;
+    width: 100%;
+    top: 60px;
+    transition: all 0.3s linear;
+    z-index: 1;
+    max-height: 250px;
+    overflow: auto;
+    box-shadow: 0px 4px 10px #0000004f;
+}
+
+.countries-list.hidden,
+.provinces-list.hidden,
+.cities-list.hidden,
+.transports-list.hidden {
+    height: 0px;
+    overflow: hidden;
+    transition: all 0.3s linear;
+}
+
+.countries-list ul,
+.provinces-list ul,
+.cities-list ul,
+.transports-list ul {
+    display: flex;
+    margin: 0;
+    list-style: none;
+    padding: 0;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: stretch;
+    justify-content: space-around;
+    align-items: stretch;
+}
+
+li.country,
+li.province,
+li.city,
+li.transport {
+    padding: 3px 0px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s linear;
+}
+
+li.country:hover,
+li.province:hover,
+li.city:hover,
+li.transport:hover {
+    background: var(--r-color-1-blue);
+    background: radial-gradient(circle, var(--r-color-1-blue) 0%, var(--r-color-3-blue-green) 100%);
+    color: var(--d-color-1);
+}
+
 .form-group.buttons {
     flex-direction: row;
 }
@@ -116,57 +177,4 @@ input.btn-back {
 .form-group.buttons .btn-back {
     margin: 18px auto 0px;
     width: 171px;
-}
-
-.countries-list,
-.provinces-list,
-.cities-list {
-    background: var(--d-color-1);
-    border-radius: 6px;
-    position: absolute;
-    width: 100%;
-    top: 60px;
-    transition: all 0.3s linear;
-    z-index: 1;
-    max-height: 250px;
-    overflow: auto;
-    box-shadow: 0px 4px 10px #0000004f;
-}
-
-.countries-list.hidden,
-.provinces-list.hidden,
-.cities-list.hidden {
-    height: 0px;
-    overflow: hidden;
-    transition: all 0.3s linear;
-}
-
-.countries-list ul,
-.provinces-list ul,
-.cities-list ul {
-    display: flex;
-    margin: 0;
-    list-style: none;
-    padding: 0;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-content: stretch;
-    justify-content: space-around;
-    align-items: stretch;
-}
-
-li.country,
-li.province,
-li.city {
-    padding: 3px 0px;
-    text-align: center;
-    cursor: pointer;
-}
-
-li.country:hover,
-li.province:hover,
-li.city:hover {
-    background: var(--r-color-1-blue);
-    background: radial-gradient(circle, var(--r-color-1-blue) 0%, var(--r-color-3-blue-green) 100%);
-    color: var(--d-color-1);
 }

@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { City } from 'src/app/models/city/city';
 import { Country } from 'src/app/models/country/country';
 import { Province } from 'src/app/models/province/province';
+import { Transport } from 'src/app/models/transport/transport';
 import { CityService } from 'src/app/services/city/city.service';
 import { CountryService } from 'src/app/services/country/country.service';
 import { ProvinceService } from 'src/app/services/province/province.service';
 import { TouristService } from 'src/app/services/tourist/tourist.service';
+import { TransportService } from 'src/app/services/transport/transport.service';
 
 @Component({
   selector: 'app-form',
@@ -14,25 +16,33 @@ import { TouristService } from 'src/app/services/tourist/tourist.service';
 })
 export class FormComponent implements OnInit {
   step: number = 1;
+
   showCountriesList: boolean = false;
   showProvincesList: boolean = false;
   showCitiesList: boolean = false;
+  showTransportsList: boolean = false;
+
   countriesList: any;
   provincesList: any;
   citiesList: any;
+  transportsList: any;
+
   countrySelected: Country = new Country();
   provinceSelected: Province = new Province();
   citySelected: City = new City();
+  transportSelected: Transport = new Transport();
 
   constructor(
     private countryService: CountryService,
     private cityService: CityService,
     private provinceService: ProvinceService,
-    private touristService: TouristService
+    private touristService: TouristService,
+    private transportService: TransportService
   ) { }
 
   ngOnInit(): void {
     this.getCountries();
+    this.getTransports();
   }
 
   getCountries() {
@@ -68,6 +78,17 @@ export class FormComponent implements OnInit {
     )
   }
 
+  getTransports() {
+    this.transportService.getTravelModes()?.subscribe(
+      resp => {
+        this.transportsList = resp;
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
   getTourist(email: string) {
     this.touristService.getTourist(email)?.subscribe(
       resp => {
@@ -87,18 +108,28 @@ export class FormComponent implements OnInit {
     this.showCountriesList = !this.showCountriesList;
     this.showProvincesList = false;
     this.showCitiesList = false;
+    this.showTransportsList = false;
   }
 
   showProvinces() {
     this.showCountriesList = false;
     this.showProvincesList = !this.showProvincesList;
     this.showCitiesList = false;
+    this.showTransportsList = false;
   }
 
   showCities() {
     this.showCountriesList = false;
     this.showProvincesList = false;
     this.showCitiesList = !this.showCitiesList;
+    this.showTransportsList = false;
+  }
+
+  showTransports() {
+    this.showCountriesList = false;
+    this.showProvincesList = false;
+    this.showCitiesList = false;
+    this.showTransportsList = !this.showTransportsList;
   }
 
   selectCountry(country: Country) {
@@ -123,5 +154,12 @@ export class FormComponent implements OnInit {
     this.showCitiesList = false;
     this.citySelected = city;
   }
+
+  selectTransport(transport: Transport) {
+    this.transportSelected = transport;
+    this.showTransportsList = false;
+  }
+
+  
 
 }

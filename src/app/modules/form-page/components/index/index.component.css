@@ -4,7 +4,7 @@
     height: 100vh;
     overflow: hidden;
     background: var(--r-color-1-blue);
-    background: linear-gradient( 330deg, var(--r-color-1-blue) -35%, var(--d-color-1) 100%);
+    background: linear-gradient(330deg, var(--r-color-1-blue) -130%, var(--d-color-1) 100%);
 }
 
 .background-image img {
@@ -32,6 +32,10 @@
     height: auto;
 }
 
+.logo.mobile {
+    display: none;
+}
+
 .form {
     width: 30%;
     position: absolute;
@@ -41,4 +45,36 @@
     padding: 5%;
     border: 3px solid var(--d-color-2);
     border-radius: 12px;
+}
+
+
+/*============= RESPONSIVE DESIGN =============*/
+
+@media all and (min-width: 320px) and (max-width:480px) {
+    .background-image {
+        height: 112vh;
+    }
+    .background-image img {
+        height: 100%;
+        width: auto;
+    }
+    .form {
+        top: initial;
+        left: 0;
+        right: 0;
+        margin: 12px auto;
+        transform: initial;
+        width: calc(90% - 28px);
+        padding: 12px;
+    }
+    .logo.large-screens {
+        display: none;
+    }
+    .logo.mobile {
+        display: block;
+        position: relative;
+        width: 126px;
+        margin: -18px calc(50% - (126px / 2)) 33px calc(50% - (126px / 2));
+        left: 0;
+    }
 }

@@ -2,17 +2,27 @@
     <h1 class="title">TU FOTO</h1>
     <h3 class="subtitle">AL CORREO</h3>
 </div>
-<form [ngClass]="step==1?'step-1':'step-1 hidden'">
-    <div class="form-group">
-        <input type="email" name="email" id="email" placeholder="Correo">
-    </div>
-    <div class="terms">
-        Al hacer clic en el botón siguiente, autorizo el uso de mis datos personales, ley 1582 de 2012
-    </div>
-    <div class="form-group">
-        <input type="button" value="Siguiente" class="btn-next" (click)="nextStep(2)">
-    </div>
-</form>
+<ng-container *ngIf="form">
+    <form name="form" method="post" [formGroup]="form" (ngSubmit)="validateMail()" [ngClass]="step==1?'step-1':'step-1 hidden'" novalidate id="form">
+        <div class="form-group">
+            <input type="email" name="email" id="email" placeholder="Correo" formControlName="email" required>
+        </div>
+        <div class="terms">
+            <p> Autorizo el uso de mis datos personales, ley 1582 de 2012 </p>
+            <label for="terms">
+                SI
+                <input type="radio" value="SI" class="radio-button" name="terms">
+            </label>
+            <label for="termis">
+                NO
+                <input type="radio" value="NO" class="radio-button" name="terms">
+            </label>
+        </div>
+        <div class="form-group">
+            <input type="button" value="Siguiente" class="btn-next" (click)="validateMail()">
+        </div>
+    </form>
+</ng-container>
 
 <form [ngClass]="step==2?'step-2':'step-2 hidden'">
     <div class="form-group">

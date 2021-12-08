@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { City } from 'src/app/models/city/city';
 import { Country } from 'src/app/models/country/country';
 import { Province } from 'src/app/models/province/province';
+import { Tourist } from 'src/app/models/tourist/tourist';
 import { Transport } from 'src/app/models/transport/transport';
 import { ActivityService } from 'src/app/services/activity/activity.service';
 import { CityService } from 'src/app/services/city/city.service';
@@ -17,6 +19,8 @@ import { TransportService } from 'src/app/services/transport/transport.service';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
+  form: FormGroup;
+  tourist: Tourist = new Tourist();
   step: number = 1;
 
   showCountriesList: boolean = false;
@@ -44,8 +48,13 @@ export class FormComponent implements OnInit {
     private touristService: TouristService,
     private transportService: TransportService,
     private activityService: ActivityService,
-    private placeService: PlaceService
-  ) { }
+    private placeService: PlaceService,
+    private formBuilder: FormBuilder
+  ) {
+    this.form = formBuilder.group({
+      email: new FormControl(this.tourist.email, [Validators.required, Validators.email])
+    });
+  }
 
   ngOnInit(): void {
     this.getCountries();
@@ -207,6 +216,19 @@ export class FormComponent implements OnInit {
     }
 
     this.maxBirthdate = yyyy + '-' + mm + '-' + dd;
+  }
+
+  validateMail() {
+    this.touristService.getTourist(this.form?.value.email)?.subscribe(
+      resp => {
+        if (!resp.exists) {
+          this.nextStep(2);
+        } else {
+          this.nextStep(3);
+        }
+        console.log(resp);
+      }
+    );
   }
 
 }

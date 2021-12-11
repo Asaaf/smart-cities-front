@@ -6,7 +6,7 @@
     <form name="form" method="post" [formGroup]="form" (ngSubmit)="validateMail()" [ngClass]="step==1?'step-1':'step-1 hidden'" novalidate id="form">
         <div class="form-group">
             <input type="email" name="email" id="email" placeholder="Correo" formControlName="email" required>
-            <div class="alert-danger" *ngIf="emailField!.invalid && emailField!.dirty || emailField!.touched">
+            <div class="alert-danger" *ngIf="emailField!.invalid && (emailField!.dirty || emailField!.touched)">
                 <div *ngFor="let messageError of getMessagesErrors(emailField, 'correo electrónico')" class="container-error-message">
                     {{messageError}}
                 </div>
@@ -29,40 +29,65 @@
     </form>
 </ng-container>
 
-<form [ngClass]="step==2?'step-2':'step-2 hidden'">
+<form [formGroup]="formStep2" [ngClass]="step==2?'step-2':'step-2 hidden'">
     <div class="form-group">
-        <input type="text" name="birthdate" id="birthdate" placeholder="Fecha de nacimiento" onfocus="(this.type='date')" onfocusout="(this.type='text')" type='date' min='1899-01-01' max='{{maxBirthdate}}'>
+        <input type="text" name="birthdate" id="birthdate" formControlName="birthdate" placeholder="Fecha de nacimiento" onfocus="(this.type='date')" onfocusout="(this.type='text')" type='date' min='1899-01-01' max='{{maxBirthdate}}'>
+        <div class="alert-danger" *ngIf="birthdateField && birthdateField!.invalid && (birthdateField!.dirty || birthdateField!.touched)">
+            <div *ngFor="let messageError of getMessagesErrors(birthdateField, 'fecha de nacimiento')" class="container-error-message">
+                {{messageError}}
+            </div>
+        </div>
     </div>
     <div class="form-group">
-        <input type="text" name="country" id="country" placeholder="País de procedencia" (click)="showCountries()" value="{{countrySelected.name}}" readonly>
+        <input type="text" name="country" id="country" formControlName="country" placeholder="País de procedencia" (click)="showCountries()" value="{{countrySelected.name}}" readonly>
         <div [ngClass]="showCountriesList?'countries-list':'countries-list hidden'">
             <ul>
                 <li class="country" *ngFor="let country of countriesList" (click)="selectCountry(country)">{{country.name}}</li>
             </ul>
         </div>
+        <div class="alert-danger" *ngIf="countryField && countryField!.invalid && (countryField!.dirty || countryField!.touched)">
+            <div *ngFor="let messageError of getMessagesErrors(countryField, 'país')" class="container-error-message">
+                {{messageError}}
+            </div>
+        </div>
     </div>
     <div class="form-group">
-        <input type="text" name="province" id="province" placeholder="Departamento" (click)="showProvinces()" value="{{provinceSelected.name}}" readonly>
+        <input type="text" name="province" id="province" formControlName="province" placeholder="Departamento" (click)="showProvinces()" value="{{provinceSelected.name}}" readonly>
         <div [ngClass]="showProvincesList?'provinces-list':'provinces-list hidden'">
             <ul *ngIf="countrySelected">
                 <li class="province" *ngFor="let province of provincesList" (click)="selectProvince(province)">{{province.name}}</li>
             </ul>
         </div>
+        <div class="alert-danger" *ngIf="provinceField && provinceField!.invalid && (provinceField!.dirty || provinceField!.touched)">
+            <div *ngFor="let messageError of getMessagesErrors(provinceField, 'departamento')" class="container-error-message">
+                {{messageError}}
+            </div>
+        </div>
     </div>
     <div class="form-group">
-        <input type="text" name="city" id="city" placeholder="Ciudades" (click)="showCities()" value="{{citySelected.name}}" readonly>
+        <input type="text" name="city" id="city" formControlName="city" placeholder="Ciudades" (click)="showCities()" value="{{citySelected.name}}" readonly>
         <div [ngClass]="showCitiesList?'cities-list':'cities-list hidden'">
             <ul *ngIf="provinceSelected">
                 <li class="city" *ngFor="let city of citiesList" (click)="selectCity(city)">{{city.name}}</li>
             </ul>
         </div>
+        <div class="alert-danger" *ngIf="cityField && cityField!.invalid && (cityField!.dirty || cityField!.touched)">
+            <div *ngFor="let messageError of getMessagesErrors(cityField, 'ciudad')" class="container-error-message">
+                {{messageError}}
+            </div>
+        </div>
     </div>
     <div class="form-group">
-        <input type="text" name="travel_modes" id="travel_modes" placeholder="Modo de viaje" (click)="showTransports()" value="{{transportSelected.name}}" readonly>
+        <input type="text" name="travel_modes" id="travel_modes" formControlName="travelModes" placeholder="Modo de viaje" (click)="showTransports()" value="{{transportSelected.name}}" readonly>
         <div [ngClass]="showTransportsList?'transports-list':'transports-list hidden'">
             <ul>
                 <li class="transport" *ngFor="let transport of transportsList" (click)="selectTransport(transport)">{{transport.name}}</li>
             </ul>
+        </div>
+        <div class="alert-danger" *ngIf="travelModesField && travelModesField!.invalid && (travelModesField!.dirty || travelModesField!.touched)">
+            <div *ngFor="let messageError of getMessagesErrors(travelModesField, 'modo de viaje')" class="container-error-message">
+                {{messageError}}
+            </div>
         </div>
     </div>
     <div class="form-group buttons">

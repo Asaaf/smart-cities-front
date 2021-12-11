@@ -20,6 +20,8 @@ import { TransportService } from 'src/app/services/transport/transport.service';
 })
 export class FormComponent implements OnInit {
   form: FormGroup;
+  formStep2: FormGroup;
+  formStep3: FormGroup;
   tourist: Tourist = new Tourist();
   step: number = 1;
 
@@ -41,7 +43,8 @@ export class FormComponent implements OnInit {
   transportSelected: Transport = new Transport();
   maxBirthdate: string = "";
 
-  private PATTERN_EMAIL = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+  private EMAIL_PATTERN = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+  private DATE_FORMAT_PATTERN = /\d{4}-\d{2}-\d{2}/;
 
   constructor(
     private countryService: CountryService,
@@ -54,8 +57,16 @@ export class FormComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.form = formBuilder.group({
-      email: new FormControl(this.tourist.email, [Validators.required, Validators.pattern(this.PATTERN_EMAIL)])
+      email: new FormControl(this.tourist.email, [Validators.required, Validators.pattern(this.EMAIL_PATTERN)])
     });
+    this.formStep2 = formBuilder.group({
+      birthdate: new FormControl(this.tourist.birth_date, [Validators.required, Validators.pattern(this.DATE_FORMAT_PATTERN)]),
+      country: new FormControl('', [Validators.required]),
+      province: new FormControl('', [Validators.required]),
+      city: new FormControl('', [Validators.required]),
+      travelModes: new FormControl('', [Validators.required])
+    });
+    this.formStep3 = formBuilder.group({});
   }
 
   ngOnInit(): void {
@@ -68,6 +79,26 @@ export class FormComponent implements OnInit {
 
   get emailField() {
     return this.form.get('email');
+  }
+
+  get birthdateField() {
+    return this.formStep2.get('birthdate');
+  }
+
+  get countryField() {
+    return this.formStep2.get('country');
+  }
+
+  get provinceField() {
+    return this.formStep2.get('province');
+  }
+
+  get cityField() {
+    return this.formStep2.get('city');
+  }
+
+  get travelModesField() {
+    return this.formStep2.get('travelModes');
   }
 
   getCountries() {

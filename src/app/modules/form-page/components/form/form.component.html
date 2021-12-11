@@ -6,6 +6,11 @@
     <form name="form" method="post" [formGroup]="form" (ngSubmit)="validateMail()" [ngClass]="step==1?'step-1':'step-1 hidden'" novalidate id="form">
         <div class="form-group">
             <input type="email" name="email" id="email" placeholder="Correo" formControlName="email" required>
+            <div class="alert-danger" *ngIf="emailField!.invalid && emailField!.dirty || emailField!.touched">
+                <div *ngFor="let messageError of getMessagesErrors(emailField, 'correo electrónico')" class="container-error-message">
+                    {{messageError}}
+                </div>
+            </div>
         </div>
         <div class="terms">
             <p> Autorizo el uso de mis datos personales, ley 1582 de 2012 </p>

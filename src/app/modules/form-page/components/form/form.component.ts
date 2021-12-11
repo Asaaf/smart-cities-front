@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { City } from 'src/app/models/city/city';
 import { Country } from 'src/app/models/country/country';
 import { Province } from 'src/app/models/province/province';
@@ -41,6 +41,8 @@ export class FormComponent implements OnInit {
   transportSelected: Transport = new Transport();
   maxBirthdate: string = "";
 
+  private PATTERN_EMAIL = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+
   constructor(
     private countryService: CountryService,
     private cityService: CityService,
@@ -52,7 +54,7 @@ export class FormComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.form = formBuilder.group({
-      email: new FormControl(this.tourist.email, [Validators.required, Validators.email])
+      email: new FormControl(this.tourist.email, [Validators.required, Validators.pattern(this.PATTERN_EMAIL)])
     });
   }
 
@@ -62,6 +64,10 @@ export class FormComponent implements OnInit {
     this.getActivities();
     this.getPlaces();
     this.maxDate();
+  }
+
+  get emailField() {
+    return this.form.get('email');
   }
 
   getCountries() {
@@ -219,16 +225,50 @@ export class FormComponent implements OnInit {
   }
 
   validateMail() {
-    this.touristService.getTourist(this.form?.value.email)?.subscribe(
-      resp => {
-        if (!resp.exists) {
-          this.nextStep(2);
-        } else {
-          this.nextStep(3);
+    if(this.form.valid) {
+      this.touristService.getTourist(this.form?.value.email)?.subscribe(
+        resp => {
+          if (!resp.exists) {
+            this.nextStep(2);
+          } else {
+            this.nextStep(3);
+          }
+          console.log(resp);
         }
-        console.log(resp);
-      }
-    );
+      );
+    }
   }
+
+  getMessagesErrors(field: any, nameField: string): string[] {
+    let messages: string[] = [];
+    if(field.hasError('required')) {
+      messages.push(`El campo ${nameField} es requerido.`);
+    }
+    if(field.hasError('pattern')) {
+      messages.push(`Debe ingresar un ${nameField} válido.`);
+    }
+    return messages;
+  }
+
+  /**
+   * Se obtiene el key name de un Abstract Control a través del control padre
+   */
+  private getNameControl(control: AbstractControl): string | null {
+    let group = <FormGroup>control.parent;
+    if (!group) {
+      return null;
+    }
+    let name: string = "";
+    Object.keys(group.controls).forEach(key => {
+      let childControl = group.get(key);
+      if (childControl !== control) {
+        return;
+      }
+      name = key;
+    });
+    return name;
+  }
+
+  
 
 }

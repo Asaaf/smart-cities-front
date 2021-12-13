@@ -283,3 +283,11 @@ label.places-label .checkmark:after {
         margin: 0px 13% 54px 13%;
     }
 }
+
+.alert-danger {
+    color:#721c24;
+}
+
+.conatiner-error-message {
+    padding: 3px;
+}

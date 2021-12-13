@@ -57,7 +57,8 @@ export class FormComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.form = formBuilder.group({
-      email: new FormControl(this.tourist.email, [Validators.required, Validators.pattern(this.EMAIL_PATTERN)])
+      email: new FormControl(this.tourist.email, [Validators.required, Validators.pattern(this.EMAIL_PATTERN)]),
+      authorizationTerms: new FormControl('', [Validators.required, Validators.pattern('true')])
     });
     this.formStep2 = formBuilder.group({
       birthdate: new FormControl(this.tourist.birth_date, [Validators.required, Validators.pattern(this.DATE_FORMAT_PATTERN)]),
@@ -79,6 +80,10 @@ export class FormComponent implements OnInit {
 
   get emailField() {
     return this.form.get('email');
+  }
+
+  get authorizationTermsField() {
+    return this.form.get('authorizationTerms');
   }
 
   get birthdateField() {
@@ -280,14 +285,22 @@ export class FormComponent implements OnInit {
 
   getMessagesErrors(field: any, nameField: string): string[] {
     let messages: string[] = [];
-    console.log(field.value);
-    if(field.hasError('required')) {
-      messages.push(`El campo ${nameField} es requerido.`);
+    if (this.getNameControl(field) == 'authorizationTerms') {
+      if(field.hasError('pattern')) {
+        messages.push(`Debe aceptar los términos para continuar.`);
+      }
+      if(field.hasError('required')) {
+        messages.push(`El campo ${nameField} es requerido.`);
+      }
     }
-    if(field.hasError('pattern')) {
-      messages.push(`Debe ingresar un ${nameField} válido.`);
+    else {
+      if(field.hasError('required')) {
+        messages.push(`El campo ${nameField} es requerido.`);
+      }
+      if(field.hasError('pattern')) {
+        messages.push(`Debe ingresar un ${nameField} válido.`);
+      }
     }
-    console.log(messages);
     return messages;
   }
 

@@ -16,12 +16,17 @@
             <p> Autorizo el uso de mis datos personales, ley 1582 de 2012 </p>
             <label for="terms">
                 SI
-                <input type="radio" value="SI" class="radio-button" name="terms">
+                <input type="radio" value="true" class="radio-button" name="authorizationTerms" formControlName="authorizationTerms">
             </label>
             <label for="termis">
                 NO
-                <input type="radio" value="NO" class="radio-button" name="terms">
+                <input type="radio" value="false" class="radio-button" name="authorizationTerms" formControlName="authorizationTerms">
             </label>
+            <div class="alert-danger" *ngIf="form.touched && authorizationTermsField!.invalid">
+                <div *ngFor="let messageError of getMessagesErrors(authorizationTermsField, 'autorización')" class="container-error-message">
+                    {{messageError}}
+                </div>
+            </div>
         </div>
         <div class="form-group">
             <input type="button" value="Siguiente" class="btn-next" (click)="validateMail()">

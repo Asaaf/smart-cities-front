@@ -61,7 +61,7 @@ export class FormComponent implements OnInit {
     });
     this.formStep2 = formBuilder.group({
       birthdate: new FormControl(this.tourist.birth_date, [Validators.required, Validators.pattern(this.DATE_FORMAT_PATTERN)]),
-      country: new FormControl('', [Validators.required]),
+      country: new FormControl(this.countrySelected.name, [Validators.required]),
       province: new FormControl('', [Validators.required]),
       city: new FormControl('', [Validators.required]),
       travelModes: new FormControl('', [Validators.required])
@@ -178,10 +178,6 @@ export class FormComponent implements OnInit {
     )
   }
 
-  nextStep(step: number) {
-    this.step = step;
-  }
-
   showCountries() {
     this.showCountriesList = !this.showCountriesList;
     this.showProvincesList = false;
@@ -270,14 +266,28 @@ export class FormComponent implements OnInit {
     }
   }
 
+  nextStep(step: number) {
+    if(step == 2) {
+      this.step = step;
+    }
+    else if(this.step == 2 && step == 1) {
+      this.step = step;
+    }
+    else if(step == 3 && this.formStep2.valid) {
+      this.step = step;
+    }
+  }
+
   getMessagesErrors(field: any, nameField: string): string[] {
     let messages: string[] = [];
+    console.log(field.value);
     if(field.hasError('required')) {
       messages.push(`El campo ${nameField} es requerido.`);
     }
     if(field.hasError('pattern')) {
       messages.push(`Debe ingresar un ${nameField} válido.`);
     }
+    console.log(messages);
     return messages;
   }
 

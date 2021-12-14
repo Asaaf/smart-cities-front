@@ -14,4 +14,11 @@ export class TouristService {
     let path = environment.URL + '/tourists/' + email;
     return this.http.get<any>(path);
   }
+
+  sendForm(model: any): Observable<any> | null {
+    let params = JSON.stringify(model);
+    let path = environment.URL + '/tourist-photos/associate';
+    console.log(params);
+    return this.http.post(path, params, { headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin':'*' } });
+  }
 }

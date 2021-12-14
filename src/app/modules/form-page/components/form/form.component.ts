@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { City } from 'src/app/models/city/city';
 import { Country } from 'src/app/models/country/country';
 import { Province } from 'src/app/models/province/province';
@@ -42,6 +43,7 @@ export class FormComponent implements OnInit {
   citySelected: City = new City();
   transportSelected: Transport = new Transport();
   maxBirthdate: string = "";
+  code: string = "";
 
   private EMAIL_PATTERN = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
   private DATE_FORMAT_PATTERN = /\d{4}-\d{2}-\d{2}/;
@@ -54,7 +56,8 @@ export class FormComponent implements OnInit {
     private transportService: TransportService,
     private activityService: ActivityService,
     private placeService: PlaceService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute
   ) {
     this.form = formBuilder.group({
       email: new FormControl(this.tourist.email, [Validators.required, Validators.pattern(this.EMAIL_PATTERN)]),
@@ -67,7 +70,9 @@ export class FormComponent implements OnInit {
       city: new FormControl('', [Validators.required]),
       travel_modes: new FormControl('', [Validators.required])
     });
-    this.formStep3 = formBuilder.group({});
+    this.formStep3 = formBuilder.group({
+      places_of_interest: new FormControl()
+    });
   }
 
   ngOnInit(): void {
@@ -76,6 +81,9 @@ export class FormComponent implements OnInit {
     this.getActivities();
     this.getPlaces();
     this.maxDate();
+    this.route.queryParams.subscribe(params => {
+      this.code = params['code'];
+    });
   }
 
   get emailField() {
@@ -214,7 +222,7 @@ export class FormComponent implements OnInit {
   selectCountry(country: Country) {
     this.showCountriesList = false;
     this.countrySelected = country;
-    this.formStep2.controls['country'].setErrors({'incorrect': false});
+    this.formStep2.controls['country'].setErrors({ 'incorrect': false });
     this.formStep2.controls['country'].setValue(country.name);
     let countryId = this.countrySelected.id;
     if (countryId) {
@@ -225,7 +233,7 @@ export class FormComponent implements OnInit {
   selectProvince(province: Province) {
     this.showProvincesList = false;
     this.provinceSelected = province;
-    this.formStep2.controls['province'].setErrors({'incorrect': false});
+    this.formStep2.controls['province'].setErrors({ 'incorrect': false });
     this.formStep2.controls['province'].setValue(province.name);
     let provinceId = this.provinceSelected.id;
     if (provinceId) {
@@ -235,14 +243,14 @@ export class FormComponent implements OnInit {
 
   selectCity(city: City) {
     this.showCitiesList = false;
-    this.formStep2.controls['city'].setErrors({'incorrect': false});
+    this.formStep2.controls['city'].setErrors({ 'incorrect': false });
     this.formStep2.controls['city'].setValue(city.name);
     this.citySelected = city;
   }
 
   selectTransport(transport: Transport) {
     this.showTransportsList = false;
-    this.formStep2.controls['travel_modes'].setErrors({'incorrect': false});
+    this.formStep2.controls['travel_modes'].setErrors({ 'incorrect': false });
     this.formStep2.controls['travel_modes'].setValue(transport.name);
     this.transportSelected = transport;
   }
@@ -265,28 +273,29 @@ export class FormComponent implements OnInit {
   }
 
   validateMail() {
-    if(this.form.valid) {
+    if (this.form.valid) {
       this.touristService.getTourist(this.form?.value.email)?.subscribe(
         resp => {
           if (!resp.exists) {
+            //En caso de que no exista
             this.nextStep(2);
           } else {
-            this.nextStep(3);
+            //En caso de que si exista
+            this.step = 4;
           }
-          console.log(resp);
         }
       );
     }
   }
 
   nextStep(step: number) {
-    if(step == 2) {
+    if (step == 2) {
       this.step = step;
     }
-    else if(this.step == 2 && step == 1) {
+    else if (this.step == 2 && step == 1) {
       this.step = step;
     }
-    else if(step == 3 && this.formStep2.valid) {
+    else if (step == 3 && this.formStep2.valid) {
       this.step = step;
     }
   }
@@ -294,18 +303,18 @@ export class FormComponent implements OnInit {
   getMessagesErrors(field: any, nameField: string): string[] {
     let messages: string[] = [];
     if (this.getNameControl(field) == 'authorizationTerms') {
-      if(field.hasError('pattern')) {
+      if (field.hasError('pattern')) {
         messages.push(`Debe aceptar los términos para continuar.`);
       }
-      if(field.hasError('required')) {
+      if (field.hasError('required')) {
         messages.push(`El campo ${nameField} es requerido.`);
       }
     }
     else {
-      if(field.hasError('required')) {
+      if (field.hasError('required')) {
         messages.push(`El campo ${nameField} es requerido.`);
       }
-      if(field.hasError('pattern')) {
+      if (field.hasError('pattern')) {
         messages.push(`Debe ingresar un ${nameField} válido.`);
       }
     }
@@ -331,6 +340,32 @@ export class FormComponent implements OnInit {
     return name;
   }
 
-  
+  registry() {
+    console.log(this.form.value.birthdate);
+    let model: any = {
+      tourist_photo_code: this.code,
+      email: this.form.value.email,
+      birth_date: this.formStep2.value.birthdate,
+      city_id: this.citySelected.id,
+      travel_mode_id: this.transportSelected.id,
+      activities: [],
+      places_of_interest: [],
+      places_visited: [],
+      gender: 'O',
+      city_id_to_visit: 361,
+      companions: 3
+    }
+
+    this.touristService.sendForm(model)?.subscribe(
+      resp => {
+        console.log(resp);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+
 
 }

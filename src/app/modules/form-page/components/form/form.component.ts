@@ -62,10 +62,10 @@ export class FormComponent implements OnInit {
     });
     this.formStep2 = formBuilder.group({
       birthdate: new FormControl(this.tourist.birth_date, [Validators.required, Validators.pattern(this.DATE_FORMAT_PATTERN)]),
-      country: new FormControl(this.countrySelected.name, [Validators.required]),
+      country: new FormControl('', [Validators.required]),
       province: new FormControl('', [Validators.required]),
       city: new FormControl('', [Validators.required]),
-      travelModes: new FormControl('', [Validators.required])
+      travel_modes: new FormControl('', [Validators.required])
     });
     this.formStep3 = formBuilder.group({});
   }
@@ -103,7 +103,7 @@ export class FormComponent implements OnInit {
   }
 
   get travelModesField() {
-    return this.formStep2.get('travelModes');
+    return this.formStep2.get('travel_modes');
   }
 
   getCountries() {
@@ -214,6 +214,8 @@ export class FormComponent implements OnInit {
   selectCountry(country: Country) {
     this.showCountriesList = false;
     this.countrySelected = country;
+    this.formStep2.controls['country'].setErrors({'incorrect': false});
+    this.formStep2.controls['country'].setValue(country.name);
     let countryId = this.countrySelected.id;
     if (countryId) {
       this.getProvinces(countryId);
@@ -223,6 +225,8 @@ export class FormComponent implements OnInit {
   selectProvince(province: Province) {
     this.showProvincesList = false;
     this.provinceSelected = province;
+    this.formStep2.controls['province'].setErrors({'incorrect': false});
+    this.formStep2.controls['province'].setValue(province.name);
     let provinceId = this.provinceSelected.id;
     if (provinceId) {
       this.getCities(provinceId);
@@ -231,12 +235,16 @@ export class FormComponent implements OnInit {
 
   selectCity(city: City) {
     this.showCitiesList = false;
+    this.formStep2.controls['city'].setErrors({'incorrect': false});
+    this.formStep2.controls['city'].setValue(city.name);
     this.citySelected = city;
   }
 
   selectTransport(transport: Transport) {
-    this.transportSelected = transport;
     this.showTransportsList = false;
+    this.formStep2.controls['travel_modes'].setErrors({'incorrect': false});
+    this.formStep2.controls['travel_modes'].setValue(transport.name);
+    this.transportSelected = transport;
   }
 
   maxDate() {

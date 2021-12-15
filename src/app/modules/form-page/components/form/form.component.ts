@@ -67,11 +67,11 @@ export class FormComponent implements OnInit {
       birthdate: new FormControl(this.tourist.birth_date, [Validators.required, Validators.pattern(this.DATE_FORMAT_PATTERN)]),
       country: new FormControl('', [Validators.required]),
       province: new FormControl('', [Validators.required]),
-      city: new FormControl('', [Validators.required]),
-      travel_modes: new FormControl('', [Validators.required])
+      city: new FormControl('', [Validators.required])
     });
     this.formStep3 = formBuilder.group({
-      places_of_interest: new FormControl()
+      places_of_interest: new FormControl(),
+      travel_modes: new FormControl('', [Validators.required])
     });
   }
 
@@ -111,7 +111,7 @@ export class FormComponent implements OnInit {
   }
 
   get travelModesField() {
-    return this.formStep2.get('travel_modes');
+    return this.formStep3.get('travel_modes');
   }
 
   getCountries() {
@@ -250,8 +250,8 @@ export class FormComponent implements OnInit {
 
   selectTransport(transport: Transport) {
     this.showTransportsList = false;
-    this.formStep2.controls['travel_modes'].setErrors({ 'incorrect': false });
-    this.formStep2.controls['travel_modes'].setValue(transport.name);
+    this.formStep3.controls['travel_modes'].setErrors({ 'incorrect': false });
+    this.formStep3.controls['travel_modes'].setValue(transport.name);
     this.transportSelected = transport;
   }
 
@@ -359,10 +359,8 @@ export class FormComponent implements OnInit {
     this.touristService.sendForm(model)?.subscribe(
       resp => {
         console.log(resp);
+          this.nextStep(4);        
       },
-      error => {
-        console.log(error);
-      }
     );
   }
 

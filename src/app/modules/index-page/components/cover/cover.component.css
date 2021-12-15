@@ -30,18 +30,32 @@ img.bg-1 {
 }
 
 img.bg-2 {
+    transform: rotate( 180deg);
+    opacity: 0.6 !important;
+    top: 0;
+}
+
+img.bg-2,
+img.bg-3 {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
+    opacity: 0.3;
 }
 
 .cover-title {
+    display: flex;
     position: absolute;
     z-index: 1;
-    top: 36%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
 }
 
 .cover-title h1 {
@@ -60,23 +74,15 @@ span.letter {
     opacity: 0;
 }
 
-.cover-title h1::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 3px;
-    bottom: 0;
-    left: 0;
-    transform: all 0.3s linear;
-    background-color: var(--d-color-1);
-}
-
 .cover-title h3 {
-    color: var(--d-color-1);
+    color: var(--d-color-2);
     font-family: var(--title-font-4);
     letter-spacing: 4px;
     text-align: center;
     margin: 6px 0px;
+    padding: 1px 69px;
+    background-color: var(--d-color-1);
+    font-size: 24px;
 }
 
 .bar,
@@ -156,4 +162,14 @@ span.letter {
 .menu.hidden {
     width: 0;
     overflow: hidden;
+}
+
+@media all and (min-width: 320px) and (max-width:480px) {
+    .logo {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    img.bg-2 {
+        display: none;
+    }
 }

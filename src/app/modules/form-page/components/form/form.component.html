@@ -14,13 +14,13 @@
         </div>
         <div class="terms">
             <p> Autorizo el uso de mis datos personales, ley 1581 de 2012 </p>
-            <label for="terms">
-                SI
-                <input type="radio" value="true" class="radio-button" name="authorizationTerms" formControlName="authorizationTerms">
+            <label class="radio-container">Si
+                <input type="radio" checked="checked" value="true" class="radio-button" name="authorizationTerms" formControlName="authorizationTerms">
+                <span class="radio-checkmark"></span>
             </label>
-            <label for="termis">
-                NO
-                <input type="radio" value="false" class="radio-button" name="authorizationTerms" formControlName="authorizationTerms">
+            <label class="radio-container">No
+                <input type="radio" checked="checked" value="false" class="radio-button" name="authorizationTerms" formControlName="authorizationTerms">
+                <span class="radio-checkmark"></span>
             </label>
             <div class="alert-danger" *ngIf="form.touched && authorizationTermsField!.invalid">
                 <div *ngFor="let messageError of getMessagesErrors(authorizationTermsField, 'autorización')" class="container-error-message">
@@ -36,7 +36,7 @@
 
 <form [formGroup]="formStep2" [ngClass]="step==2?'step-2':'step-2 hidden'">
     <div class="form-group">
-        <input type="text" name="birthdate" id="birthdate" formControlName="birthdate" placeholder="Fecha de nacimiento" onfocus="(this.type='date')" onfocusout="(this.type='text')" type='date' min='1899-01-01' max='{{maxBirthdate}}'>
+        <input type="text" name="birthdate" id="birthdate" formControlName="birthdate" placeholder="Fecha de nacimiento" onfocusout="(this.type='text')" onfocus="(this.type='date')" min='1899-01-01' max='{{maxBirthdate}}'>
         <div class="alert-danger" *ngIf="birthdateField && birthdateField!.invalid && (birthdateField!.dirty || birthdateField!.touched)">
             <div *ngFor="let messageError of getMessagesErrors(birthdateField, 'fecha de nacimiento')" class="container-error-message">
                 {{messageError}}
@@ -70,7 +70,7 @@
         </div>
     </div>
     <div class="form-group">
-        <input type="text" name="city" id="city" formControlName="city" placeholder="Ciudades" (click)="showCities()" value="{{citySelected.name}}" readonly>
+        <input type="text" name="city" id="city" formControlName="city" placeholder="Ciudad" (click)="showCities()" value="{{citySelected.name}}" readonly>
         <div [ngClass]="showCitiesList?'cities-list':'cities-list hidden'">
             <ul *ngIf="provinceSelected">
                 <li class="city" *ngFor="let city of citiesList" (click)="selectCity(city)">{{city.name}}</li>
@@ -82,6 +82,13 @@
             </div>
         </div>
     </div>
+    <div class="form-group buttons">
+        <input type="button" value="Atrás" class="btn-back" (click)="nextStep(1)">
+        <input type="button" value="Siguiente" class="btn-next" (click)="nextStep(3)">
+    </div>
+</form>
+
+<form [ngClass]="step==3?'step-3':'step-3 hidden'" (ngSubmit)="registry()" [formGroup]="formStep3">
     <div class="form-group">
         <input type="text" name="travel_modes" id="travel_modes" formControlName="travel_modes" placeholder="Modo de viaje" (click)="showTransports()" value="{{transportSelected.name}}" readonly>
         <div [ngClass]="showTransportsList?'transports-list':'transports-list hidden'">
@@ -95,13 +102,6 @@
             </div>
         </div>
     </div>
-    <div class="form-group buttons">
-        <input type="button" value="Atrás" class="btn-back" (click)="nextStep(1)">
-        <input type="button" value="Siguiente" class="btn-next" (click)="nextStep(3)">
-    </div>
-</form>
-
-<form [ngClass]="step==3?'step-3':'step-3 hidden'" (ngSubmit)="registry()">
     <div class="form-group">
         <span class="subtitle">¿Qué actividades turísticas son de tu interés?</span>
         <div class="activity-container">

@@ -7,6 +7,7 @@ import { AboutComponent } from './components/about/about.component';
 import { InfoComponent } from './components/info/info.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 
@@ -16,7 +17,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CoverComponent,
     AboutComponent,
     InfoComponent,
-    ContactComponent
+    ContactComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,

@@ -66,6 +66,7 @@
         transform: initial;
         width: calc(90% - 28px);
         padding: 12px;
+        border: 0;
     }
     .logo.large-screens {
         display: none;

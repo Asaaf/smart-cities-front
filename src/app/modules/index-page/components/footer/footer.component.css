@@ -1,0 +1,50 @@
+.footer-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-victoria,
+.logo-gobernacion,
+.brand-victoria,
+.logo-uam {
+    width: 120px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 21px;
+}
+
+.logo-victoria img,
+.logo-gobernacion img,
+.brand-victoria img,
+.logo-uam img {
+    width: 100%;
+    height: auto;
+}
+
+.logo-victoria {
+    width: 136px;
+}
+
+.logo-uam {
+    width: 168px;
+}
+
+.logo-gobernacion {
+    width: 167px;
+}
+
+.copy {
+    background: var(--d-color-2);
+    text-align: center;
+    color: white;
+    font-size: 12px;
+    padding: 3px 0px;
+}

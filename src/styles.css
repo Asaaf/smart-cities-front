@@ -80,7 +80,7 @@ body {
 /* Handle */
 
  ::-webkit-scrollbar-thumb {
-    background: var(--r-color-3-blue-green);
+    background: var(--d-color-2);
     transition: all 0.3s linear;
 }
 

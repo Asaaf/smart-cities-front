@@ -13,7 +13,7 @@ export class CoverComponent implements OnInit, AfterViewInit {
   faBars = faBars;
   faTimes = faTimes;
   letterAnimation: string = "compressed";
-  title: string[] = "PILOTO".split("");
+  title: string[] = "SMART CITIES".split("");
   loading: boolean = true;
   animation: any;
   menu: boolean = false;

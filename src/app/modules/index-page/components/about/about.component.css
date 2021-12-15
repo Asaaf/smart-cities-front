@@ -1,5 +1,14 @@
 .container-about {
     overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px dashed var(--r-color-5-dark-gray);
+    margin: 12px;
+    padding: 15px 0px;
 }
 
 .section-1,
@@ -25,6 +34,8 @@
     background: var(--r-color-1-blue);
     color: var(--d-color-1);
     font-family: var(--title-font-1);
+    border-top-right-radius: 45px;
+    border-bottom-right-radius: 45px;
 }
 
 .section-1 .title {
@@ -35,4 +46,23 @@
 .section-2 .title {
     margin-left: calc((40% - 30px) + (10% + 15px));
     margin-bottom: 30px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top-left-radius: 45px;
+    border-bottom-left-radius: 45px;
+}
+
+.image {
+    position: relative;
+    width: 100%;
+    height: 275px;
+    overflow: hidden;
+}
+
+.image img {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

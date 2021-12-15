@@ -88,12 +88,24 @@ span.letter {
 .bar,
 .times {
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     top: 21px;
     right: 21px;
     font-size: 30px;
     cursor: pointer;
     transition: all 0.3s linear;
+    background: var(--d-color-2);
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    line-height: 45px;
+    color: var(--d-color-1);
+    border-radius: 3px;
+}
+
+.bar:hover,
+.times:hover {
+    background: var(--r-color-2-orange);
 }
 
 .bar.hidden {
@@ -112,7 +124,7 @@ span.letter {
     width: 100%;
     height: 100vh;
     transition: all 0.3s linear;
-    background: #fbfbfbc7;
+    background: var(--d-color-1);
 }
 
 .menu ul {
@@ -121,7 +133,7 @@ span.letter {
     margin: 0;
     padding: 0;
     left: 50%;
-    top: 60%;
+    top: 50%;
     transform: translate(-50%, -50%);
 }
 
@@ -164,12 +176,44 @@ span.letter {
     overflow: hidden;
 }
 
-@media all and (min-width: 320px) and (max-width:480px) {
+.menu-logo {
+    position: absolute;
+    width: 200px;
+    overflow: hidden;
+    left: 50%;
+    top: 69px;
+    transform: translateX(-50%);
+}
+
+.menu-logo img {
+    width: 100%;
+}
+
+.m-logo-background {
+    display: none;
+}
+
+@media all and (min-width: 320px) and (max-width:1024px) {
     .logo {
+        top: 6px;
         left: 50%;
         transform: translateX(-50%);
     }
     img.bg-2 {
         display: none;
+    }
+    .m-logo-background {
+        display: block;
+        position: absolute;
+        z-index: 1;
+        top: -12%;
+        left: 50%;
+        width: 300px;
+        height: 300px;
+        transform-origin: 50% 31%;
+        transform: rotate(45deg) translateX(-50%);
+        border-radius: 6px;
+        background: var(--d-color-1);
+        opacity: .9;
     }
 }

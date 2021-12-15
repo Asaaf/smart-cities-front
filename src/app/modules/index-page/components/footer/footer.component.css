@@ -5,6 +5,7 @@
     align-content: center;
     justify-content: center;
     align-items: center;
+    margin: 30px 0px;
 }
 
 .logo-victoria,
@@ -12,13 +13,14 @@
 .brand-victoria,
 .logo-uam {
     width: 120px;
+    max-height: 100px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     align-content: center;
     justify-content: center;
     align-items: center;
-    margin: 0px 21px;
+    margin: 15px 21px;
 }
 
 .logo-victoria img,

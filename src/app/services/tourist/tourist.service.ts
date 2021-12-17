@@ -15,10 +15,19 @@ export class TouristService {
     return this.http.get<any>(path);
   }
 
-  sendForm(model: any): Observable<any> | null {
+  sendForm(model: any, callback: any) {
     let params = JSON.stringify(model);
     let path = environment.URL + '/tourist-photos/associate';
-    console.log(params);
-    return this.http.post(path, params, { headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin':'*' } });
+    /*
+    return this.http.post(path, params, { headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin':'*' } });*/
+
+    var xhr = new XMLHttpRequest;
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        callback(xhr.response);
+      }
+    }
+    xhr.open('POST', path, true);
+    xhr.send(model);
   }
 }

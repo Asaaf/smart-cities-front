@@ -342,25 +342,31 @@ export class FormComponent implements OnInit {
   }
 
   registry() {
-    console.log(this.form.value.birthdate);
-    let model: any = {
-      tourist_photo_code: this.code,
-      email: this.form.value.email,
-      birth_date: this.formStep2.value.birthdate,
-      city_id: this.citySelected.id,
-      travel_mode_id: this.transportSelected.id,
-      activities: [],
-      places_of_interest: [],
-      places_visited: [],
-      gender: 'O',
-      city_id_to_visit: 361,
-      companions: 3
-    }
+    let formData = new FormData();
+    let cityId: any = this.citySelected.id;
+    let travelModes: any = this.transportSelected.id;
+    let activities: any = JSON.stringify([]);
+    let places_of_interest: any = JSON.stringify([]);
+    let places_visited: any = JSON.stringify([]);
+    let city_id_to_visit: any = 361;
+    let companions: any = 0;
+    formData.append('tourist_photo_code', this.code);
+    formData.append('email', this.form.value.email);
+    formData.append('birth_date', this.formStep2.value.birthdate);
+    formData.append('city_id', cityId);
+    formData.append('travel_mode_id', travelModes);
+    formData.append('activities', activities);
+    formData.append('places_of_interest', places_of_interest);
+    formData.append('places_visited', places_visited);
+    formData.append('gender', 'O');
+    formData.append('city_id_to_visit', city_id_to_visit);
+    formData.append('companions', companions);
 
-    this.touristService.sendForm(model)?.subscribe(
-      resp => {
-        console.log(resp);
-        this.step = 4;
+    this.touristService.sendForm(formData,
+      (resp: any) => {
+        if (resp) {
+          this.step = 4;
+        }
       },
     );
   }

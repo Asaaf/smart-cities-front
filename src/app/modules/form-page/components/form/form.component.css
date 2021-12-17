@@ -334,6 +334,17 @@ label.places-label .checkmark:after {
     font-family: var(--title-font-2);
 }
 
+.alert-danger {
+    color: #721c24;
+    width: 100%;
+}
+
+.container-error-message {
+    padding: 3px;
+    width: 100%;
+    text-align: center;
+}
+
 @media all and (min-width: 320px) and (max-width:480px) {
     label.activity-label,
     label.places-label {
@@ -343,12 +354,4 @@ label.places-label .checkmark:after {
         width: 74%;
         margin: 0px 13% 54px 13%;
     }
-}
-
-.alert-danger {
-    color: #721c24;
-}
-
-.conatiner-error-message {
-    padding: 3px;
 }

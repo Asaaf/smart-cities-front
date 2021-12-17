@@ -17,7 +17,8 @@ import { TransportService } from 'src/app/services/transport/transport.service';
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  styleUrls: ['./form.component.css'],
+  providers: [TouristService]
 })
 export class FormComponent implements OnInit {
   form: FormGroup;
@@ -359,7 +360,7 @@ export class FormComponent implements OnInit {
     this.touristService.sendForm(model)?.subscribe(
       resp => {
         console.log(resp);
-          this.nextStep(4);        
+        this.step = 4;
       },
     );
   }

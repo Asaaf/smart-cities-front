@@ -150,6 +150,15 @@ span.letter {
     transition: all 0.3s linear;
 }
 
+.menu li a {
+    text-decoration: none;
+    color: var(--d-color-2);
+}
+
+.menu li a:hover {
+    color: var(--d-color-1);
+}
+
 .menu li:hover {
     color: var(--d-color-1);
     border-color: var(--d-color-1);

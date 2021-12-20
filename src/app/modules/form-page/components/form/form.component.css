@@ -56,7 +56,8 @@ input#birthdate,
 input#country,
 input#province,
 input#city,
-input#travel_modes {
+input#travel_modes,
+input#companions {
     text-align: center;
     font-size: 21px;
     border-radius: 6px;

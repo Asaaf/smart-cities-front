@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { City } from 'src/app/models/city/city';
 import { Country } from 'src/app/models/country/country';
@@ -48,6 +48,7 @@ export class FormComponent implements OnInit {
 
   private EMAIL_PATTERN = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
   private DATE_FORMAT_PATTERN = /\d{4}-\d{2}-\d{2}/;
+  private NUMBER_FORMAT_PATTERN = /^[0-9]*$/;
 
   constructor(
     private countryService: CountryService,
@@ -71,8 +72,10 @@ export class FormComponent implements OnInit {
       city: new FormControl('', [Validators.required])
     });
     this.formStep3 = formBuilder.group({
-      places_of_interest: new FormControl(),
-      travel_modes: new FormControl('', [Validators.required])
+      travel_modes: new FormControl(''),
+      companions: new FormControl('', [Validators.pattern(this.NUMBER_FORMAT_PATTERN)]),
+      activities_list: new FormArray([]),
+      places_of_interest: new FormArray([]),
     });
   }
 
@@ -114,6 +117,11 @@ export class FormComponent implements OnInit {
   get travelModesField() {
     return this.formStep3.get('travel_modes');
   }
+
+  get companionsField() {
+    return this.formStep3.get('companions');
+  }
+
 
   getCountries() {
     this.countryService.getCountries()?.subscribe(
@@ -341,15 +349,52 @@ export class FormComponent implements OnInit {
     return name;
   }
 
+  onActivityCheckChange(event: any) {
+    const formArray: FormArray = this.formStep3.get('activities_list') as FormArray;
+
+    if (event.target.checked) {
+      formArray.push(new FormControl(parseInt(event.target.value)));
+    } else {
+      let i: number = 0;
+
+      formArray.controls.forEach((ctrl: any) => {
+        if (ctrl.value == event.target.value) {
+          formArray.removeAt(i);
+          return;
+        }
+        i++;
+      });
+    }
+  }
+
+  onPlacesOfInterestCheckChange(event: any) {
+    const formArray: FormArray = this.formStep3.get('places_of_interest') as FormArray;
+
+    if (event.target.checked) {
+      formArray.push(new FormControl(parseInt(event.target.value)));
+    } else {
+      let i: number = 0;
+
+      formArray.controls.forEach((ctrl: any) => {
+        if (ctrl.value == event.target.value) {
+          formArray.removeAt(i);
+          return;
+        }
+        i++;
+      });
+    }
+  }
+
   registry() {
+    console.log(this.formStep3);
     let formData = new FormData();
     let cityId: any = this.citySelected.id;
     let travelModes: any = this.transportSelected.id;
-    let activities: any = JSON.stringify([]);
+    let activities: any = JSON.stringify(this.formStep3.value.activities_list);
     let places_of_interest: any = JSON.stringify([]);
-    let places_visited: any = JSON.stringify([]);
+    let places_visited: any = JSON.stringify(this.formStep3.value.places_of_interest);
     let city_id_to_visit: any = 361;
-    let companions: any = 0;
+    let companions: any = this.formStep3.value.companions;
     formData.append('tourist_photo_code', this.code);
     formData.append('email', this.form.value.email);
     formData.append('birth_date', this.formStep2.value.birthdate);
@@ -370,7 +415,6 @@ export class FormComponent implements OnInit {
       },
     );
   }
-
 
 
 }

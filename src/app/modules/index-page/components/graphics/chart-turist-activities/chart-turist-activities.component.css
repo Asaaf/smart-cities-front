@@ -1,0 +1,13 @@
+.turist-activities-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.turist-activities-chart {
+    width: 100%;
+}

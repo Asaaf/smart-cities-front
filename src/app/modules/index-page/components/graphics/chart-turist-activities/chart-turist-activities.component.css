@@ -11,3 +11,8 @@
 .turist-activities-chart {
     width: 100%;
 }
+
+h1.title {
+    width: 100%;
+    font-size: 18px;
+}

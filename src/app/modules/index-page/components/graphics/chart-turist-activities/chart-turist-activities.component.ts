@@ -26,7 +26,11 @@ export class ChartTuristActivitiesComponent implements OnInit {
         data: ['bar', 'bar2'],
         align: 'left',
       },
-      tooltip: {},
+      toolbox: {
+        feature: {
+          saveAsImage: {}
+        }
+      },
       xAxis: {
         data: xAxisData,
         silent: false,

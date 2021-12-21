@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChartTuristOriginComponent implements OnInit {
   options: any;
-  
+
   constructor() { }
 
   ngOnInit(): void {
@@ -27,7 +27,11 @@ export class ChartTuristOriginComponent implements OnInit {
         data: ['bar', 'bar2'],
         align: 'left',
       },
-      tooltip: {},
+      toolbox: {
+        feature: {
+          saveAsImage: {}
+        }
+      },
       xAxis: {
         data: xAxisData,
         silent: false,

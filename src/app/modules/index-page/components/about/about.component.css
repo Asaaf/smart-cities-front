@@ -22,32 +22,45 @@
 
 .section-1 .title,
 .section-2 .title {
-    width: calc(100% + 42px);
+    width: calc(100% - 42px);
     background: var(--r-color-1-blue);
 }
 
 .section-1 .title {
     margin: 0px 0px 18px -42px;
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
 }
 
 .section-2 .title {
     margin: 0px 0px 18px 0px;
-    border-top-left-radius: 6px;
-    border-bottom-left-radius: 6px;
 }
 
 .section-1 .title h1,
 .section-2 .title h1 {
     color: var(--d-color-1);
-    margin: 0px 0px 3px 45px;
+    margin: 6px 0px 6px 45px;
     font-family: var(--title-font-4);
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 21px;
 }
 
 .section-1 .description,
 .section-2 .description {
     text-align: justify;
+}
+
+.title {
+    position: relative;
+}
+
+.title h1::after {
+    content: "";
+    position: absolute;
+    width: 42px;
+    height: 100%;
+    background: var(--r-color-3-blue-green);
+    right: calc(42px * -2);
+    top: 0;
 }
 
 .image {

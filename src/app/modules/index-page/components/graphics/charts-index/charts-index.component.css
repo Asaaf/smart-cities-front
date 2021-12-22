@@ -1,5 +1,6 @@
 .charts-container {
-    margin: 42px;
+    border-top: 1px dashed var(--r-color-5-dark-gray);
+    padding: 42px;
 }
 
 h1.title {

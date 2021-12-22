@@ -7,25 +7,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChartTuristTransportComponent implements OnInit {
   options: any;
+  xAxisDataTransports: Array<String> = new Array();
+  numberTourist: Array<number> = new Array();
 
   constructor() { }
 
   ngOnInit(): void {
+    this.getData();
+    this.drawnChart();
+  }
 
+  getData() {
+    this.xAxisDataTransports.push('Paquete turístico');
+    this.xAxisDataTransports.push('Transporte público');
+    this.xAxisDataTransports.push('Vehículo particular');
 
-    const xAxisData = [];
-    const data1 = [];
-    const data2 = [];
+    this.numberTourist.push(93);
+    this.numberTourist.push(732);
+    this.numberTourist.push(260);
+  }
 
-    for (let i = 0; i < 100; i++) {
-      xAxisData.push('category' + i);
-      data1.push((Math.sin(i / 5) * (i / 5 - 10) + i / 6) * 5);
-      data2.push((Math.cos(i / 5) * (i / 5 - 10) + i / 6) * 5);
-    }
-
+  drawnChart() {
     this.options = {
       legend: {
-        data: ['bar', 'bar2'],
+        data: ['Modo de transporte'],
         align: 'left',
       },
       toolbox: {
@@ -33,8 +38,17 @@ export class ChartTuristTransportComponent implements OnInit {
           saveAsImage: {}
         }
       },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross',
+          label: {
+            backgroundColor: '#283b56'
+          }
+        }
+      },
       xAxis: {
-        data: xAxisData,
+        data: this.xAxisDataTransports,
         silent: false,
         splitLine: {
           show: false,
@@ -43,16 +57,10 @@ export class ChartTuristTransportComponent implements OnInit {
       yAxis: {},
       series: [
         {
-          name: 'bar',
+          name: 'Modo de transporte',
           type: 'bar',
-          data: data1,
+          data: this.numberTourist,
           animationDelay: (idx: number) => idx * 10,
-        },
-        {
-          name: 'bar2',
-          type: 'bar',
-          data: data2,
-          animationDelay: (idx: number) => idx * 10 + 100,
         },
       ],
       animationEasing: 'elasticOut',

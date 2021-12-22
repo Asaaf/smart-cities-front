@@ -7,25 +7,77 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChartTuristTimeComponent implements OnInit {
   options: any;
+  xAxisContJetson: Array<number> = new Array();
+  xAxisContForm: Array<number> = new Array();
+  date: Array<any> = new Array();
 
   constructor() {
+  }
 
-    const xAxisData = [];
-    const data1 = [];
-    const data2 = [];
+  ngOnInit(): void {
+    this.getData();
+    this.drawnChart();
+  }
 
-    for (let i = 0; i < 100; i++) {
-      xAxisData.push('category' + i);
-      data1.push((Math.sin(i / 5) * (i / 5 - 10) + i / 6) * 5);
-      data2.push((Math.cos(i / 5) * (i / 5 - 10) + i / 6) * 5);
+  getData() {
+    this.xAxisContJetson.push(2);
+    this.xAxisContJetson.push(4);
+    this.xAxisContJetson.push(6);
+    this.xAxisContJetson.push(3);
+    this.xAxisContJetson.push(12);
+    this.xAxisContJetson.push(5);
+    this.xAxisContJetson.push(8);
+    this.xAxisContJetson.push(15);
+    this.xAxisContJetson.push(18);
+    this.xAxisContJetson.push(7);
+    this.xAxisContJetson.push(4);
+    this.xAxisContJetson.push(1);
+    this.xAxisContJetson.push(1);
+    this.xAxisContJetson.push(2);
+    this.xAxisContJetson.push(0);
+    this.xAxisContJetson.push(3);
+    this.xAxisContJetson.push(5);
+    this.xAxisContJetson.push(6);
+    this.xAxisContJetson.push(3);
+    this.xAxisContJetson.push(2);
+
+    this.xAxisContForm.push(2);
+    this.xAxisContForm.push(3);
+    this.xAxisContForm.push(4);
+    this.xAxisContForm.push(1);
+    this.xAxisContForm.push(9);
+    this.xAxisContForm.push(3);
+    this.xAxisContForm.push(7);
+    this.xAxisContForm.push(12);
+    this.xAxisContForm.push(12);
+    this.xAxisContForm.push(6);
+    this.xAxisContForm.push(2);
+    this.xAxisContForm.push(1);
+    this.xAxisContForm.push(1);
+    this.xAxisContForm.push(2);
+    this.xAxisContForm.push(0);
+    this.xAxisContForm.push(3);
+    this.xAxisContForm.push(1);
+    this.xAxisContForm.push(4);
+    this.xAxisContForm.push(3);
+    this.xAxisContForm.push(2);
+
+    let now = new Date();
+    let len = 20;
+    while (len--) {
+      this.date.unshift(now.toLocaleTimeString().replace(/^\D*/, ''));
+      now = new Date(+now - 540000);
     }
+  }
 
+  drawnChart() {
     this.options = {
       tooltip: {
         trigger: 'axis'
       },
       legend: {
-        data: xAxisData
+        data: ['Conteo de personas', 'Formularios registrados'],
+        align: 'left',
       },
       grid: {
         left: '3%',
@@ -41,7 +93,7 @@ export class ChartTuristTimeComponent implements OnInit {
       xAxis: {
         type: 'category',
         boundaryGap: false,
-        data: xAxisData
+        data: this.date
       },
       yAxis: {
         type: 'value'
@@ -51,19 +103,16 @@ export class ChartTuristTimeComponent implements OnInit {
           name: 'Conteo de personas',
           type: 'line',
           stack: 'Total',
-          data: data1
+          data: this.xAxisContJetson
         },
         {
           name: 'Formularios registrados',
           type: 'line',
           stack: 'Total',
-          data: data2
+          data: this.xAxisContForm
         },
       ]
     };
-  }
-
-  ngOnInit(): void {
   }
 
 }

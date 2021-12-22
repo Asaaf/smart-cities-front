@@ -64,7 +64,7 @@ export class ChartTuristOriginComponent implements OnInit {
         data: this.xAxisDataCities,
         silent: false,
         splitLine: {
-          show: false,
+          show: true,
         },
       },
       yAxis: {},

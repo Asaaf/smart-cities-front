@@ -7,23 +7,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChartTuristActivitiesComponent implements OnInit {
   options: any;
+  xAxisDataActivities: Array<String> = new Array();
+  numberTourist: Array<number> = new Array();
 
   constructor() { }
 
   ngOnInit(): void {
-    const xAxisData = [];
-    const data1 = [];
-    const data2 = [];
+    this.getData();
+    this.drawnChart();
+  }
 
-    for (let i = 0; i < 100; i++) {
-      xAxisData.push('category' + i);
-      data1.push((Math.sin(i / 5) * (i / 5 - 10) + i / 6) * 5);
-      data2.push((Math.cos(i / 5) * (i / 5 - 10) + i / 6) * 5);
-    }
+  getData() {
+    this.xAxisDataActivities.push('Avistamiento de aves');
+    this.xAxisDataActivities.push('Fiestas patronales');
+    this.xAxisDataActivities.push('Turismo de aventura en río (Rivering, Tubbing, Cayoning, Senderismo)');
 
+    this.numberTourist.push(344);
+    this.numberTourist.push(562);
+    this.numberTourist.push(179);
+  }
+
+  drawnChart() {
     this.options = {
       legend: {
-        data: ['bar', 'bar2'],
+        data: ['Actividades'],
         align: 'left',
       },
       toolbox: {
@@ -31,26 +38,30 @@ export class ChartTuristActivitiesComponent implements OnInit {
           saveAsImage: {}
         }
       },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross',
+          label: {
+            backgroundColor: '#283b56'
+          }
+        }
+      },
       xAxis: {
-        data: xAxisData,
+        data: this.xAxisDataActivities,
         silent: false,
         splitLine: {
-          show: false,
+          show: true,
         },
       },
       yAxis: {},
       series: [
         {
-          name: 'bar',
+          name: 'Actividades',
           type: 'bar',
-          data: data1,
+          data: this.numberTourist,
+          textOutline: 'none',
           animationDelay: (idx: number) => idx * 10,
-        },
-        {
-          name: 'bar2',
-          type: 'bar',
-          data: data2,
-          animationDelay: (idx: number) => idx * 10 + 100,
         },
       ],
       animationEasing: 'elasticOut',

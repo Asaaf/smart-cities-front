@@ -4,7 +4,7 @@
     height: 100vh;
     overflow: hidden;
     background: var(--r-color-1-blue);
-    background: linear-gradient(330deg, var(--r-color-1-blue) -130%, var(--d-color-1) 100%);
+    background: linear-gradient( 330deg, rgb(204 204 204) -130%, var(--d-color-1) 100%);
 }
 
 .background-image img {
@@ -13,7 +13,7 @@
     top: 50%;
     transform: translate(-50%, -50%);
     width: 110%;
-    opacity: 0.4;
+    opacity: 0.15;
 }
 
 .logo {

@@ -26,6 +26,7 @@ export class FormComponent implements OnInit {
   formStep3: FormGroup;
   tourist: Tourist = new Tourist();
   step: number = 1;
+  endMessage: string = "";
 
   showCountriesList: boolean = false;
   showProvincesList: boolean = false;
@@ -290,6 +291,7 @@ export class FormComponent implements OnInit {
             this.nextStep(2);
           } else {
             //En caso de que si exista
+            this.endMessage = "¡Felicidades! Hemos enviado tu foto al correo electrónico.";
             this.step = 4;
           }
         }
@@ -386,7 +388,6 @@ export class FormComponent implements OnInit {
   }
 
   registry() {
-    console.log(this.formStep3);
     let formData = new FormData();
     let cityId: any = this.citySelected.id;
     let travelModes: any = this.transportSelected.id;
@@ -409,9 +410,13 @@ export class FormComponent implements OnInit {
 
     this.touristService.sendForm(formData,
       (resp: any) => {
-        if (resp) {
-          this.step = 4;
+        console.log(JSON.parse(resp).id);
+        if (JSON.parse(resp).id == undefined) {
+          this.endMessage = "¡Algo ha fallado! Intenta nuevamente :(";
+        } else {
+          this.endMessage = "¡Felicidades! Hemos enviado tu foto al correo electrónico.";
         }
+        this.step = 4;
       },
     );
   }

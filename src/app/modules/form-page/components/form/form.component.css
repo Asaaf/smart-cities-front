@@ -60,19 +60,19 @@ input#travel_modes,
 input#companions {
     text-align: center;
     font-size: 21px;
-    border-radius: 6px;
-    border: 0;
+    border-radius: 12px;
     padding: 3px 0px;
     outline: none;
     font-family: var(--body-font-1);
-    letter-spacing: 3px;
+    letter-spacing: 1px;
     margin: 12px 0px;
+    border: 2px solid var(--r-color-1-blue);
 }
 
 .terms {
     text-align: center;
     padding: 12px 0px;
-    font-family: var(--body-font-1);
+    font-family: var(--body-font-2);
     font-size: 18px;
     margin-bottom: 15px;
     display: flex;
@@ -107,8 +107,9 @@ input#companions {
     left: 0;
     height: 25px;
     width: 25px;
-    background-color: #eee;
+    background-color: var(--d-color-1);
     border-radius: 50%;
+    border: 2px solid var(--r-color-1-blue);
 }
 
 .radio-container:hover input~.radio-checkmark {
@@ -143,15 +144,17 @@ input#companions {
 .cities-list,
 .transports-list {
     background: var(--d-color-1);
-    border-radius: 6px;
+    border-radius: 1px;
     position: absolute;
-    width: 100%;
-    top: 60px;
+    width: 96%;
+    left: 2%;
+    top: 50px;
     transition: all 0.3s linear;
     z-index: 1;
     max-height: 250px;
     overflow: auto;
     box-shadow: 0px 4px 10px #0000004f;
+    padding: 3px 0px;
 }
 
 .countries-list.hidden,
@@ -161,6 +164,7 @@ input#companions {
     height: 0px;
     overflow: hidden;
     transition: all 0.3s linear;
+    padding: 0;
 }
 
 .countries-list ul,
@@ -203,7 +207,7 @@ li.transport:hover {
 
 input.btn-next,
 input.btn-back {
-    margin: 0px 25%;
+    margin: 18px 6px 18px 6px;
     font-size: 21px;
     background: var(--r-color-2-orange);
     background: linear-gradient(50deg, var(--r-color-1-blue) 0%, var(--r-color-3-blue-green) 100%);
@@ -236,14 +240,33 @@ input.btn-back:hover {
 
 .form-group.buttons .btn-next,
 .form-group.buttons .btn-back {
-    margin: 18px auto 0px;
+    margin: 18px 3px 0px;
     width: 171px;
 }
 
 span.subtitle {
+    position: relative;
     text-align: center;
     font-family: var(--body-font-2);
     font-size: 21px;
+    background: var(--r-color-1-blue);
+    color: var(--d-color-1);
+    width: calc(100% + 24px);
+    margin-top: 24px;
+    margin-left: -12px;
+    margin-bottom: 12px;
+}
+
+span.subtitle:after {
+    content: "";
+    display: block;
+    position: absolute;
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
+    border-top: 18px solid var(--r-color-1-blue);
+    bottom: -18px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 label.activity-label,
@@ -254,8 +277,9 @@ label.places-label {
     padding-left: 35px;
     margin: 6px;
     cursor: pointer;
-    font-size: 21px;
+    font-size: 18px;
     text-transform: capitalize;
+    font-weight: 600;
 }
 
 label.activity-label input,
@@ -282,6 +306,7 @@ label.places-label input {
 label.activity-label input~.checkmark,
 label.places-label input~.checkmark {
     background-color: var(--d-color-1);
+    border: 2px solid var(--r-color-1-blue);
 }
 
 label.activity-label input:checked~.checkmark,
@@ -336,8 +361,11 @@ label.places-label .checkmark:after {
 }
 
 .alert-danger {
-    color: #721c24;
+    color: #f44336;
     width: 100%;
+    font-family: var(--body-font-2);
+    text-shadow: 0px 0px 3px #ffffffa6;
+    font-size: 16px;
 }
 
 .container-error-message {

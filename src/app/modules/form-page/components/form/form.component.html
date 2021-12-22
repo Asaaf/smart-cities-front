@@ -122,7 +122,7 @@
     </div>
     <div class="form-group">
         <span class="subtitle">¿Qué sitios turísticos has visitado?</span>
-        <div class="place-container">
+        <div class="places-container">
             <label for="place" *ngFor="let place of placesList" class="places-label">
                 {{place.name}}
                 <input type="checkbox" name="place" id="place" value="{{place.id}}" (change)="onPlacesOfInterestCheckChange($event)">
@@ -137,5 +137,5 @@
 </form>
 
 <div [ngClass]="step==4?'step-4':'step-4 hidden'">
-    <p>¡Felicidades! Hemos enviado tu foto al correo electrónico.</p>
+    <p>{{endMessage}}</p>
 </div>

@@ -76,7 +76,7 @@ export class ChartTuristTimeComponent implements OnInit {
         trigger: 'axis'
       },
       legend: {
-        data: ['Conteo de personas', 'Formularios registrados'],
+        data: ['Formularios registrados', 'Conteo de personas'],
         align: 'left',
       },
       grid: {
@@ -102,13 +102,13 @@ export class ChartTuristTimeComponent implements OnInit {
         {
           name: 'Conteo de personas',
           type: 'line',
-          stack: 'Total',
+          //stack: 'Total',
           data: this.xAxisContJetson
         },
         {
           name: 'Formularios registrados',
           type: 'line',
-          stack: 'Total',
+          //stack: 'Total',
           data: this.xAxisContForm
         },
       ]

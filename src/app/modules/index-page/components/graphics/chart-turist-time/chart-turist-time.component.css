@@ -1,11 +1,14 @@
 .turist-time-container {
-    width: 100%;
+    width: calc(100% - 49px);
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     align-content: center;
     align-items: center;
     justify-content: center;
+    padding: 24px;
+    border: 1px dashed var(--r-color-5-dark-gray);
+    border-top: 0px;
 }
 
 .turist-time-chart {

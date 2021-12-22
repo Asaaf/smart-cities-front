@@ -7,24 +7,52 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChartTuristOriginComponent implements OnInit {
   options: any;
+  xAxisDataCities: Array<String> = new Array();
+  numberTourist: Array<number> = new Array();
 
   constructor() { }
 
   ngOnInit(): void {
+    this.getData();
+    this.drawnChart();
+  }
 
-    const xAxisData = [];
-    const data1 = [];
-    const data2 = [];
+  getData() {
+    this.xAxisDataCities.push('Honda');
+    this.xAxisDataCities.push('Aguadas');
+    this.xAxisDataCities.push('Anserma');
+    this.xAxisDataCities.push('Aranzazu');
+    this.xAxisDataCities.push('Fresno');
+    this.xAxisDataCities.push('Dorada');
+    this.xAxisDataCities.push('Manizales');
+    this.xAxisDataCities.push('Samaná');
+    this.xAxisDataCities.push('Pereira');
+    this.xAxisDataCities.push('Medellin');
+    this.xAxisDataCities.push('Bogotá');
+    this.xAxisDataCities.push('Manzanares');
+    this.xAxisDataCities.push('Dosquebradas');
+    this.xAxisDataCities.push('Marsella');
 
-    for (let i = 0; i < 100; i++) {
-      xAxisData.push('category' + i);
-      data1.push((Math.sin(i / 5) * (i / 5 - 10) + i / 6) * 5);
-      data2.push((Math.cos(i / 5) * (i / 5 - 10) + i / 6) * 5);
-    }
+    this.numberTourist.push(345);
+    this.numberTourist.push(10);
+    this.numberTourist.push(84);
+    this.numberTourist.push(23);
+    this.numberTourist.push(112);
+    this.numberTourist.push(163);
+    this.numberTourist.push(210);
+    this.numberTourist.push(21);
+    this.numberTourist.push(45);
+    this.numberTourist.push(9);
+    this.numberTourist.push(5);
+    this.numberTourist.push(14);
+    this.numberTourist.push(33);
+    this.numberTourist.push(11);
+  }
 
+  drawnChart() {
     this.options = {
       legend: {
-        data: ['bar', 'bar2'],
+        data: ['Ciudades'],
         align: 'left',
       },
       toolbox: {
@@ -33,25 +61,29 @@ export class ChartTuristOriginComponent implements OnInit {
         }
       },
       xAxis: {
-        data: xAxisData,
+        data: this.xAxisDataCities,
         silent: false,
         splitLine: {
           show: false,
         },
       },
       yAxis: {},
+      visualMap: {
+        orient: 'horizontal',
+        left: 'center',
+        min: 1,
+        max: 1000,
+        text: ['Alto', 'Bajo'],
+        inRange: {
+          color: ['#FD665F', '#FFCE34', '#65B581']
+        }
+      },
       series: [
         {
-          name: 'bar',
+          name: 'Ciudades',
           type: 'bar',
-          data: data1,
+          data: this.numberTourist,
           animationDelay: (idx: number) => idx * 10,
-        },
-        {
-          name: 'bar2',
-          type: 'bar',
-          data: data2,
-          animationDelay: (idx: number) => idx * 10 + 100,
         },
       ],
       animationEasing: 'elasticOut',

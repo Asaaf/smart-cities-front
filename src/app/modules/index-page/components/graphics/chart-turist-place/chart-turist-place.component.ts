@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as echarts from 'echarts';
 import * as $ from 'jquery';
+import { TouristService } from 'src/app/services/tourist/tourist.service';
 
 @Component({
   selector: 'app-chart-turist-place',
@@ -9,15 +10,29 @@ import * as $ from 'jquery';
 })
 export class ChartTuristPlaceComponent implements OnInit {
   options: any;
+  data: Array<any> = new Array;
+  isLoading: boolean = false;
 
-  constructor() { }
+  constructor(private touristService: TouristService) { }
 
   ngOnInit(): void {
-    this.drawnChart();
+    this.getData();
+  }
+
+  getData() {
+    this.isLoading = true;
+    this.touristService.getTouristsByCity()?.subscribe(
+      resp => {
+        resp.forEach((element: any) => {
+          let city = { name: element.name.toUpperCase(), value: element.total };
+          this.data.push(city);
+        });
+        this.drawnChart();
+      }
+    )
   }
 
   drawnChart() {
-
     $.get('./assets/geo-json/victoria.json', (victoriaJson) => {
       echarts.registerMap('Victoria', victoriaJson);
 
@@ -43,7 +58,7 @@ export class ChartTuristPlaceComponent implements OnInit {
         visualMap: {
           left: 'right',
           min: 10,
-          max: 1000,
+          max: this.getMax(),
           inRange: {
             color: ['#FD665F', '#FFCE34', '#65B581']
           },
@@ -72,34 +87,22 @@ export class ChartTuristPlaceComponent implements OnInit {
                 show: true
               }
             },
-            data: [
-              { name: 'HONDA', value: 782 },
-              { name: 'LA DORADA', value: 806 },
-              { name: 'LA MERCED', value: 120 },
-              { name: 'MANZANARES', value: 145 },
-              { name: 'MARMATO', value: 231 },
-              { name: 'MARQUETALIA', value: 902 },
-              { name: 'MARULANDA', value: 22 },
-              { name: 'NEIRA', value: 30 },
-              { name: 'AGUADAS', value: 45 },
-              { name: 'MANIZALES', value: 23 },
-              { name: 'RIOSUCIO', value: 156 },
-              { name: 'ALVARADO', value: 145 },
-              { name: 'VILLAHERMOSA', value: 345 },
-              { name: 'VENADILLO', value: 122 },
-              { name: 'SANTA ISABEL', value: 234 },
-              { name: 'PUEBLO RICO', value: 1 },
-              { name: 'VICTORIA', value: 1000 },
-              { name: 'SAN SEBASTIÁN DE MARIQUITA', value: 700 },
-              { name: 'SAMANA', value: 783 },
-              { name: 'NORCASIA', value: 683 },
-              { name: 'PENSILVANIA', value: 541 },
-              { name: 'BOGOTÁ, D.C.', value: 3 }
-            ]
+            data: this.data
           }
         ]
       };
     });
+    this.isLoading = false;
+  }
+
+  getMax(): number {
+    let max: number = -1;
+    this.data.forEach(element => {
+      if (element.value > -1) {
+        max = element.value;
+      }
+    });
+    return max;
   }
 
 }

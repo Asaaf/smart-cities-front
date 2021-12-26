@@ -40,4 +40,14 @@ export class TouristService {
     let path = environment.URL + '/travel-modes/tourists/';
     return this.http.get<any>(path);
   }
+
+  getTouristsByCity(): Observable<any> | null {
+    let path = environment.URL + '/visits/cities/';
+    return this.http.get<any>(path);
+  }
+
+  getTouristsByTime(): Observable<any> | null {
+    let path = environment.URL + '/control-visits/current-month/devices-and-forms/';
+    return this.http.get<any>(path);
+  }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TouristService } from 'src/app/services/tourist/tourist.service';
 
 @Component({
   selector: 'app-chart-turist-transport',
@@ -10,21 +11,22 @@ export class ChartTuristTransportComponent implements OnInit {
   xAxisDataTransports: Array<String> = new Array();
   numberTourist: Array<number> = new Array();
 
-  constructor() { }
+  constructor(private touristService: TouristService) { }
 
   ngOnInit(): void {
     this.getData();
-    this.drawnChart();
   }
 
   getData() {
-    this.xAxisDataTransports.push('Paquete turístico');
-    this.xAxisDataTransports.push('Transporte público');
-    this.xAxisDataTransports.push('Vehículo particular');
-
-    this.numberTourist.push(93);
-    this.numberTourist.push(732);
-    this.numberTourist.push(260);
+    this.touristService.getTouristsByTransport()?.subscribe(
+      resp => {
+        resp.forEach((element: any) => {
+          this.xAxisDataTransports.push(element.name);
+          this.numberTourist.push(element.total);
+        });
+        this.drawnChart();
+      }
+    );
   }
 
   drawnChart() {

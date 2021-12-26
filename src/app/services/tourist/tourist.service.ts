@@ -35,4 +35,9 @@ export class TouristService {
     let path = environment.URL + '/activites/tourists/';
     return this.http.get<any>(path);
   }
+
+  getTouristsByTransport(): Observable<any> | null {
+    let path = environment.URL + '/travel-modes/tourists/';
+    return this.http.get<any>(path);
+  }
 }

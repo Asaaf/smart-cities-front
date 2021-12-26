@@ -13,7 +13,7 @@ import { ChartTuristTimeComponent } from './components/graphics/chart-turist-tim
 import { ChartTuristOriginComponent } from './components/graphics/chart-turist-origin/chart-turist-origin.component';
 import { ChartTouristTransportComponent } from './components/graphics/chart-tourist-transport/chart-tourist-transport.component';
 import { ChartTuristPlaceComponent } from './components/graphics/chart-turist-place/chart-turist-place.component';
-import { ChartTuristActivitiesComponent } from './components/graphics/chart-turist-activities/chart-turist-activities.component';
+import { ChartTouristActivitiesComponent } from './components/graphics/chart-tourist-activities/chart-tourist-activities.component';
 import { ChartsIndexComponent } from './components/graphics/charts-index/charts-index.component';
 
 
@@ -30,7 +30,7 @@ import { ChartsIndexComponent } from './components/graphics/charts-index/charts-
     ChartTuristOriginComponent,
     ChartTouristTransportComponent,
     ChartTuristPlaceComponent,
-    ChartTuristActivitiesComponent,
+    ChartTouristActivitiesComponent,
     ChartsIndexComponent
   ],
   imports: [

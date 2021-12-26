@@ -4,11 +4,11 @@ import * as $ from 'jquery';
 import { TouristService } from 'src/app/services/tourist/tourist.service';
 
 @Component({
-  selector: 'app-chart-turist-place',
-  templateUrl: './chart-turist-place.component.html',
-  styleUrls: ['./chart-turist-place.component.css']
+  selector: 'app-chart-tourist-place',
+  templateUrl: './chart-tourist-place.component.html',
+  styleUrls: ['./chart-tourist-place.component.css']
 })
-export class ChartTuristPlaceComponent implements OnInit {
+export class ChartTouristPlaceComponent implements OnInit {
   options: any;
   data: Array<any> = new Array;
   isLoading: boolean = false;

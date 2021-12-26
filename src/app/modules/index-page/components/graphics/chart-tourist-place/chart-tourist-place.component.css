@@ -1,4 +1,4 @@
-.turist-place-container {
+.tourist-place-container {
     width: calc(100% - 49px);
     display: flex;
     flex-direction: column;
@@ -10,7 +10,7 @@
     border: 1px dashed var(--r-color-5-dark-gray);
 }
 
-.turist-place-chart {
+.tourist-place-chart {
     width: 100%;
 }
 

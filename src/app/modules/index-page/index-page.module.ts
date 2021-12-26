@@ -12,7 +12,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { ChartTuristTimeComponent } from './components/graphics/chart-turist-time/chart-turist-time.component';
 import { ChartTouristOriginComponent } from './components/graphics/chart-tourist-origin/chart-tourist-origin.component';
 import { ChartTouristTransportComponent } from './components/graphics/chart-tourist-transport/chart-tourist-transport.component';
-import { ChartTuristPlaceComponent } from './components/graphics/chart-turist-place/chart-turist-place.component';
+import { ChartTouristPlaceComponent } from './components/graphics/chart-tourist-place/chart-tourist-place.component';
 import { ChartTouristActivitiesComponent } from './components/graphics/chart-tourist-activities/chart-tourist-activities.component';
 import { ChartsIndexComponent } from './components/graphics/charts-index/charts-index.component';
 
@@ -29,7 +29,7 @@ import { ChartsIndexComponent } from './components/graphics/charts-index/charts-
     ChartTuristTimeComponent,
     ChartTouristOriginComponent,
     ChartTouristTransportComponent,
-    ChartTuristPlaceComponent,
+    ChartTouristPlaceComponent,
     ChartTouristActivitiesComponent,
     ChartsIndexComponent
   ],

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChartTuristPlaceComponent } from './chart-turist-place.component';
+import { ChartTouristPlaceComponent } from './chart-tourist-place.component';
 
 describe('ChartTuristPlaceComponent', () => {
-  let component: ChartTuristPlaceComponent;
-  let fixture: ComponentFixture<ChartTuristPlaceComponent>;
+  let component: ChartTouristPlaceComponent;
+  let fixture: ComponentFixture<ChartTouristPlaceComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChartTuristPlaceComponent ]
+      declarations: [ ChartTouristPlaceComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChartTuristPlaceComponent);
+    fixture = TestBed.createComponent(ChartTouristPlaceComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

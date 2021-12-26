@@ -238,6 +238,13 @@ input.btn-back:hover {
     opacity: 1;
 }
 
+input[type="date"] {
+    display: block;
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    min-height: 1.2em;
+}
+
 .form-group.buttons .btn-next,
 .form-group.buttons .btn-back {
     margin: 18px 3px 0px;

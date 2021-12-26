@@ -11,7 +11,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { ChartTuristTimeComponent } from './components/graphics/chart-turist-time/chart-turist-time.component';
 import { ChartTuristOriginComponent } from './components/graphics/chart-turist-origin/chart-turist-origin.component';
-import { ChartTuristTransportComponent } from './components/graphics/chart-turist-transport/chart-turist-transport.component';
+import { ChartTouristTransportComponent } from './components/graphics/chart-tourist-transport/chart-tourist-transport.component';
 import { ChartTuristPlaceComponent } from './components/graphics/chart-turist-place/chart-turist-place.component';
 import { ChartTuristActivitiesComponent } from './components/graphics/chart-turist-activities/chart-turist-activities.component';
 import { ChartsIndexComponent } from './components/graphics/charts-index/charts-index.component';
@@ -28,7 +28,7 @@ import { ChartsIndexComponent } from './components/graphics/charts-index/charts-
     FooterComponent,
     ChartTuristTimeComponent,
     ChartTuristOriginComponent,
-    ChartTuristTransportComponent,
+    ChartTouristTransportComponent,
     ChartTuristPlaceComponent,
     ChartTuristActivitiesComponent,
     ChartsIndexComponent

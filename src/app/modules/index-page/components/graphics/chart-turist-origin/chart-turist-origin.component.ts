@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TouristService } from 'src/app/services/tourist/tourist.service';
 
 @Component({
   selector: 'app-chart-turist-origin',
@@ -10,43 +11,22 @@ export class ChartTuristOriginComponent implements OnInit {
   xAxisDataCities: Array<String> = new Array();
   numberTourist: Array<number> = new Array();
 
-  constructor() { }
+  constructor(private touristService: TouristService) { }
 
   ngOnInit(): void {
     this.getData();
-    this.drawnChart();
   }
 
   getData() {
-    this.xAxisDataCities.push('Honda');
-    this.xAxisDataCities.push('Aguadas');
-    this.xAxisDataCities.push('Anserma');
-    this.xAxisDataCities.push('Aranzazu');
-    this.xAxisDataCities.push('Fresno');
-    this.xAxisDataCities.push('Dorada');
-    this.xAxisDataCities.push('Manizales');
-    this.xAxisDataCities.push('Samaná');
-    this.xAxisDataCities.push('Pereira');
-    this.xAxisDataCities.push('Medellin');
-    this.xAxisDataCities.push('Bogotá');
-    this.xAxisDataCities.push('Manzanares');
-    this.xAxisDataCities.push('Dosquebradas');
-    this.xAxisDataCities.push('Marsella');
-
-    this.numberTourist.push(345);
-    this.numberTourist.push(10);
-    this.numberTourist.push(84);
-    this.numberTourist.push(23);
-    this.numberTourist.push(112);
-    this.numberTourist.push(163);
-    this.numberTourist.push(210);
-    this.numberTourist.push(21);
-    this.numberTourist.push(45);
-    this.numberTourist.push(9);
-    this.numberTourist.push(5);
-    this.numberTourist.push(14);
-    this.numberTourist.push(33);
-    this.numberTourist.push(11);
+    this.touristService.getTouristsByCity()?.subscribe(
+      resp => {
+        resp.forEach((element: any) => {
+          this.xAxisDataCities.push(element.name);
+          this.numberTourist.push(parseInt(element.total));
+        });
+        this.drawnChart();
+      }
+    )
   }
 
   drawnChart() {
@@ -59,6 +39,18 @@ export class ChartTuristOriginComponent implements OnInit {
         feature: {
           saveAsImage: {}
         }
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross',
+          label: {
+            backgroundColor: '#283b56'
+          }
+        }
+      },
+      grid: {
+        containLabel: true
       },
       xAxis: {
         data: this.xAxisDataCities,

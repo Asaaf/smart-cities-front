@@ -1,4 +1,4 @@
-.turist-transport-container {
+.tourist-transport-container {
     width: calc(100% - 49px);
     display: flex;
     flex-direction: column;
@@ -11,7 +11,7 @@
     border-top: 0px;
 }
 
-.turist-transport-chart {
+.tourist-transport-chart {
     width: 100%;
 }
 

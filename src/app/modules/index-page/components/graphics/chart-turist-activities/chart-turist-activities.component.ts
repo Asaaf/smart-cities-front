@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TouristService } from 'src/app/services/tourist/tourist.service';
 
 @Component({
   selector: 'app-chart-turist-activities',
@@ -10,24 +11,29 @@ export class ChartTuristActivitiesComponent implements OnInit {
   xAxisDataActivities: Array<String> = new Array();
   numberTourist: Array<number> = new Array();
 
-  constructor() { }
+  constructor(private touristService: TouristService) { }
 
   ngOnInit(): void {
     this.getData();
-    this.drawnChart();
   }
 
   getData() {
-    this.xAxisDataActivities.push('Avistamiento de aves');
-    this.xAxisDataActivities.push('Fiestas patronales');
-    this.xAxisDataActivities.push('Turismo de aventura en río (Rivering, Tubbing, Cayoning, Senderismo)');
-
-    this.numberTourist.push(344);
-    this.numberTourist.push(562);
-    this.numberTourist.push(179);
+    this.touristService.getTouristsByActivity()?.subscribe(
+      resp => {
+        resp.forEach((element: any) => {
+          this.xAxisDataActivities.push(element.name);
+          this.numberTourist.push(element.total);
+        });
+        this.drawnChart();
+      }
+    );
   }
 
   drawnChart() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = canvas.height = 100;
+
     this.options = {
       legend: {
         data: ['Actividades'],
@@ -49,6 +55,14 @@ export class ChartTuristActivitiesComponent implements OnInit {
       },
       xAxis: {
         data: this.xAxisDataActivities,
+        axisLabel: {
+          type: 'text',
+          interval: 0,
+          rotate: 0,
+          formatter: (params: any) => {
+            return params.substring(0, 9) + '...';
+          }
+        },
         silent: false,
         splitLine: {
           show: true,

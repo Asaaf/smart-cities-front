@@ -30,4 +30,9 @@ export class TouristService {
     xhr.open('POST', path, true);
     xhr.send(model);
   }
+
+  getTouristsByActivity(): Observable<any> | null {
+    let path = environment.URL + '/activites/tourists/';
+    return this.http.get<any>(path);
+  }
 }

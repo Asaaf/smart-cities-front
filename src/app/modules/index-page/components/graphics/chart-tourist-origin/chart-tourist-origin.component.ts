@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { TouristService } from 'src/app/services/tourist/tourist.service';
 
 @Component({
-  selector: 'app-chart-turist-origin',
-  templateUrl: './chart-turist-origin.component.html',
-  styleUrls: ['./chart-turist-origin.component.css']
+  selector: 'app-chart-tourist-origin',
+  templateUrl: './chart-tourist-origin.component.html',
+  styleUrls: ['./chart-tourist-origin.component.css']
 })
-export class ChartTuristOriginComponent implements OnInit {
+export class ChartTouristOriginComponent implements OnInit {
   options: any;
   xAxisDataCities: Array<String> = new Array();
   numberTourist: Array<number> = new Array();

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChartTuristOriginComponent } from './chart-turist-origin.component';
+import { ChartTouristOriginComponent } from './chart-tourist-origin.component';
 
 describe('ChartTuristOriginComponent', () => {
-  let component: ChartTuristOriginComponent;
-  let fixture: ComponentFixture<ChartTuristOriginComponent>;
+  let component: ChartTouristOriginComponent;
+  let fixture: ComponentFixture<ChartTouristOriginComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChartTuristOriginComponent ]
+      declarations: [ ChartTouristOriginComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChartTuristOriginComponent);
+    fixture = TestBed.createComponent(ChartTouristOriginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

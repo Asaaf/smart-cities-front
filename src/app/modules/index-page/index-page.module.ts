@@ -10,7 +10,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FooterComponent } from './components/footer/footer.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { ChartTuristTimeComponent } from './components/graphics/chart-turist-time/chart-turist-time.component';
-import { ChartTuristOriginComponent } from './components/graphics/chart-turist-origin/chart-turist-origin.component';
+import { ChartTouristOriginComponent } from './components/graphics/chart-tourist-origin/chart-tourist-origin.component';
 import { ChartTouristTransportComponent } from './components/graphics/chart-tourist-transport/chart-tourist-transport.component';
 import { ChartTuristPlaceComponent } from './components/graphics/chart-turist-place/chart-turist-place.component';
 import { ChartTouristActivitiesComponent } from './components/graphics/chart-tourist-activities/chart-tourist-activities.component';
@@ -27,7 +27,7 @@ import { ChartsIndexComponent } from './components/graphics/charts-index/charts-
     ContactComponent,
     FooterComponent,
     ChartTuristTimeComponent,
-    ChartTuristOriginComponent,
+    ChartTouristOriginComponent,
     ChartTouristTransportComponent,
     ChartTuristPlaceComponent,
     ChartTouristActivitiesComponent,

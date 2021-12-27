@@ -291,6 +291,7 @@ export class FormComponent implements OnInit {
             this.nextStep(2);
           } else {
             //En caso de que si exista
+            this.registry();
             this.endMessage = "¡Felicidades! Hemos enviado tu foto al correo electrónico.";
             this.step = 4;
           }
@@ -391,22 +392,35 @@ export class FormComponent implements OnInit {
     let formData = new FormData();
     let cityId: any = this.citySelected.id;
     let travelModes: any = this.transportSelected.id;
-    let activities: any = JSON.stringify(this.formStep3.value.activities_list);
-    let places_of_interest: any = JSON.stringify([]);
-    let places_visited: any = JSON.stringify(this.formStep3.value.places_of_interest);
+    let activities: any = this.formStep3.value.activities_list;
+    let places_of_interest: Array<any> = new Array;
+    let places_visited: any = this.formStep3.value.places_of_interest;
     let city_id_to_visit: any = 361;
-    let companions: any = this.formStep3.value.companions;
+    let companions: any = 0;
     formData.append('tourist_photo_code', this.code);
     formData.append('email', this.form.value.email);
-    formData.append('birth_date', this.formStep2.value.birthdate);
-    formData.append('city_id', cityId);
-    formData.append('travel_mode_id', travelModes);
-    formData.append('activities', activities);
-    formData.append('places_of_interest', places_of_interest);
-    formData.append('places_visited', places_visited);
+    if (this.formStep2.value.birthdate != null && this.formStep2.value.birthdate != undefined && this.formStep2.value.birthdate != undefined) {
+      formData.append('birth_date', this.formStep2.value.birthdate);
+    }
+    if (cityId != null && cityId != undefined && cityId != undefined) {
+      formData.append('city_id', cityId);
+    }
+    if (travelModes != null && travelModes != undefined && travelModes != undefined) {
+      formData.append('travel_mode_id', travelModes);
+    }
+    if (activities != null && activities != undefined && activities != undefined && activities.length > 0) {
+      formData.append('activities', JSON.stringify(activities));
+    }
+    if (places_of_interest != null && places_of_interest != undefined && places_of_interest != undefined && places_of_interest.length > 0) {
+      formData.append('places_of_interest', JSON.stringify(places_of_interest));
+    }
+    if (places_visited != null && places_visited != undefined && places_visited != undefined && places_visited.length > 0) {
+      console.log(places_visited);
+      formData.append('places_visited', JSON.stringify(places_visited));
+    }
     formData.append('gender', 'O');
-    formData.append('city_id_to_visit', city_id_to_visit);
-    formData.append('companions', companions);
+    formData.append('city_id_to_visit', city_id_to_visit);//+
+    formData.append('companions', companions);//+
 
     this.touristService.sendForm(formData,
       (resp: any) => {

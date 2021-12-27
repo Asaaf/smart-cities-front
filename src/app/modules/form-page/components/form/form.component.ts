@@ -51,6 +51,7 @@ export class FormComponent implements OnInit {
   private EMAIL_PATTERN = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
   private DATE_FORMAT_PATTERN = /\d{4}-\d{2}-\d{2}/;
   private NUMBER_FORMAT_PATTERN = /^[0-9]*$/;
+  dateType: string = 'text';
 
   constructor(
     private countryService: CountryService,
@@ -70,8 +71,8 @@ export class FormComponent implements OnInit {
     this.formStep2 = formBuilder.group({
       birthdate: new FormControl(this.tourist.birth_date, [Validators.required, Validators.pattern(this.DATE_FORMAT_PATTERN)]),
       country: new FormControl('', [Validators.required]),
-      province: new FormControl('', [Validators.required]),
-      city: new FormControl('', [Validators.required])
+      province: new FormControl(''),
+      city: new FormControl('')
     });
     this.formStep3 = formBuilder.group({
       travel_modes: new FormControl(''),
@@ -83,7 +84,6 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.isIOSDevice = this.detectIOS();
-    console.log(this.isIOSDevice);
     this.getCountries();
     this.getTransports();
     this.getActivities();

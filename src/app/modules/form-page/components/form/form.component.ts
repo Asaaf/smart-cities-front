@@ -32,6 +32,7 @@ export class FormComponent implements OnInit {
   showProvincesList: boolean = false;
   showCitiesList: boolean = false;
   showTransportsList: boolean = false;
+  isIOSDevice: boolean = false;
 
   countriesList: any;
   provincesList: any;
@@ -81,6 +82,8 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isIOSDevice = this.detectIOS();
+    console.log(this.isIOSDevice);
     this.getCountries();
     this.getTransports();
     this.getActivities();
@@ -435,5 +438,17 @@ export class FormComponent implements OnInit {
     );
   }
 
+  detectIOS() {
+    var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    var isAppleDevice = navigator.userAgent.includes('Macintosh');
+    var isTouchScreen = navigator.maxTouchPoints >= 1;
+    return isIOS || (isAppleDevice && (isTouchScreen || this.iOS1to12quirk()));
+  }
+
+  iOS1to12quirk() {
+    var audio = new Audio();
+    audio.volume = 0.5;
+    return audio.volume === 1;
+  }
 
 }

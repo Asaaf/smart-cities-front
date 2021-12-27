@@ -22,7 +22,6 @@ export class ChartTouristTimeComponent implements OnInit {
   getData() {
     this.touristService.getTouristsByTime()?.subscribe(
       resp => {
-        console.log(resp);
         resp.devices.forEach((element: any) => {
           this.date.push(element.date);
           this.xAxisContJetson.push(element.total)

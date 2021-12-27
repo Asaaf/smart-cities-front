@@ -36,7 +36,8 @@
 
 <form [formGroup]="formStep2" [ngClass]="step==2?'step-2':'step-2 hidden'">
     <div class="form-group">
-        <input type="text" name="birthdate" id="birthdate" formControlName="birthdate" placeholder="yyyy-mm-dd" onfocusout="(this.type='text')" onfocus="(this.type='date')" min='1899-01-01' max='{{maxBirthdate}}'>
+        <input type="text" ngIf="!isIOSDevice" name="birthdate" id="birthdate" formControlName="birthdate" placeholder="yyyy-mm-dd" onfocusout="(this.type='text')" onfocus="(this.type='date')" min='1899-01-01' max='{{maxBirthdate}}'>
+        <input type="text" ngIf="isIOSDevice" name="birthdate" id="birthdate" formControlName="birthdate" placeholder="yyyy-mm-dd">
         <div class="alert-danger" *ngIf="birthdateField && birthdateField!.invalid && (birthdateField!.dirty || birthdateField!.touched)">
             <div *ngFor="let messageError of getMessagesErrors(birthdateField, 'fecha de nacimiento')" class="container-error-message">
                 {{messageError}}

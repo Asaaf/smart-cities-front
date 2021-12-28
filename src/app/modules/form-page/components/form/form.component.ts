@@ -400,7 +400,7 @@ export class FormComponent implements OnInit {
     let places_visited: any = this.formStep3.value.places_of_interest;
     let city_id_to_visit: any = 361;
     let companions: any = 0;
-    formData.append('tourist_photo_code', this.code);
+    formData.append('photo_code', this.code);
     formData.append('email', this.form.value.email);
     if (this.formStep2.value.birthdate != null && this.formStep2.value.birthdate != undefined && this.formStep2.value.birthdate != undefined) {
       formData.append('birth_date', this.formStep2.value.birthdate);

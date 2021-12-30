@@ -240,6 +240,7 @@ input.btn-back:hover {
 
 input[type="date"] {
     display: block;
+    width: 100%;
     -webkit-appearance: textfield;
     -moz-appearance: textfield;
     min-height: 1.2em;

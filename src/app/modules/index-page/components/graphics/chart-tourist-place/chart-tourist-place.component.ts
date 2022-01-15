@@ -98,7 +98,7 @@ export class ChartTouristPlaceComponent implements OnInit {
   getMax(): number {
     let max: number = -1;
     this.data.forEach(element => {
-      if (element.value > -1) {
+      if (element.value > max) {
         max = element.value;
       }
     });

@@ -22,12 +22,22 @@ export class ChartTouristTimeComponent implements OnInit {
   getData() {
     this.touristService.getTouristsByTime()?.subscribe(
       resp => {
+        for (let i = 0; i < 10; i++) {
+          this.xAxisContJetson.push(0);
+          this.xAxisContForm.push(0);
+          this.date.push('-');
+        }
+
+        let i = 0;
         resp.devices.forEach((element: any) => {
-          this.date.push(element.date);
-          this.xAxisContJetson.push(element.total)
+          this.date[i] = element.date;
+          this.xAxisContJetson[i] = element.total;
+          i++;
         });
+        i = 0;
         resp.forms.forEach((element: any) => {
-          this.xAxisContForm.push(element.total);
+          this.xAxisContForm[i] = parseInt(element.total);
+          i++;
         });
         this.drawnChart();
       }

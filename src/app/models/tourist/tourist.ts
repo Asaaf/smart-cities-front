@@ -5,5 +5,6 @@ export class Tourist {
     email?: string;
     phone?: string;
     birth_date?: Date;
+    gender?: string;
     city?: City;
 }

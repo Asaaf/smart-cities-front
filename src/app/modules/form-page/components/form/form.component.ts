@@ -28,12 +28,14 @@ export class FormComponent implements OnInit {
   step: number = 1;
   endMessage: string = "";
 
+  showGenderList: boolean = false;
   showCountriesList: boolean = false;
   showProvincesList: boolean = false;
   showCitiesList: boolean = false;
   showTransportsList: boolean = false;
   isIOSDevice: boolean = false;
 
+  genderList: any;
   countriesList: any;
   provincesList: any;
   citiesList: any;
@@ -41,6 +43,7 @@ export class FormComponent implements OnInit {
   activitiesList: any;
   placesList: any;
 
+  genderSelected: string = 'M';
   countrySelected: Country = new Country();
   provinceSelected: Province = new Province();
   citySelected: City = new City();
@@ -70,6 +73,7 @@ export class FormComponent implements OnInit {
     });
     this.formStep2 = formBuilder.group({
       birthdate: new FormControl(this.tourist.birth_date, [Validators.required, Validators.pattern(this.DATE_FORMAT_PATTERN)]),
+      gender: new FormControl(this.tourist.gender),
       country: new FormControl('', [Validators.required]),
       province: new FormControl(''),
       city: new FormControl('')
@@ -84,6 +88,7 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.isIOSDevice = this.detectIOS();
+    this.getGenders();
     this.getCountries();
     this.getTransports();
     this.getActivities();
@@ -100,6 +105,10 @@ export class FormComponent implements OnInit {
 
   get authorizationTermsField() {
     return this.form.get('authorizationTerms');
+  }
+
+  get genderField() {
+    return this.formStep2.get('gender');
   }
 
   get birthdateField() {
@@ -126,6 +135,12 @@ export class FormComponent implements OnInit {
     return this.formStep3.get('companions');
   }
 
+  getGenders() {
+    this.genderList = new Array<any>();
+    this.genderList.push({ 'gender_name': 'Masculino', 'gender': 'M' });
+    this.genderList.push({ 'gender_name': 'Femenino', 'gender': 'F' });
+    this.genderList.push({ 'gender_name': 'Otro', 'gender': 'O' });
+  }
 
   getCountries() {
     this.countryService.getCountries()?.subscribe(
@@ -204,7 +219,16 @@ export class FormComponent implements OnInit {
     )
   }
 
+  showGenders() {
+    this.showGenderList = !this.showGenderList;
+    this.showCountriesList = false;
+    this.showProvincesList = false;
+    this.showCitiesList = false;
+    this.showTransportsList = false;
+  }
+
   showCountries() {
+    this.showGenderList = false;
     this.showCountriesList = !this.showCountriesList;
     this.showProvincesList = false;
     this.showCitiesList = false;
@@ -212,6 +236,7 @@ export class FormComponent implements OnInit {
   }
 
   showProvinces() {
+    this.showGenderList = false;
     this.showCountriesList = false;
     this.showProvincesList = !this.showProvincesList;
     this.showCitiesList = false;
@@ -219,6 +244,7 @@ export class FormComponent implements OnInit {
   }
 
   showCities() {
+    this.showGenderList = false;
     this.showCountriesList = false;
     this.showProvincesList = false;
     this.showCitiesList = !this.showCitiesList;
@@ -226,10 +252,18 @@ export class FormComponent implements OnInit {
   }
 
   showTransports() {
+    this.showGenderList = false;
     this.showCountriesList = false;
     this.showProvincesList = false;
     this.showCitiesList = false;
     this.showTransportsList = !this.showTransportsList;
+  }
+
+  selectGender(gender: any) {
+    this.showGenderList = false;
+    this.genderSelected = gender.gender;
+    this.formStep2.controls['gender'].setErrors({ 'incorrect': false });
+    this.formStep2.controls['gender'].setValue(gender.gender_name);
   }
 
   selectCountry(country: Country) {
@@ -402,8 +436,11 @@ export class FormComponent implements OnInit {
     let companions: any = 0;
     formData.append('tourist_photo_code', this.code);
     formData.append('email', this.form.value.email);
-    if (this.formStep2.value.birthdate != null && this.formStep2.value.birthdate != undefined && this.formStep2.value.birthdate != undefined) {
+    if (this.formStep2.value.birthdate != null && this.formStep2.value.birthdate != undefined) {
       formData.append('birth_date', this.formStep2.value.birthdate);
+    }
+    if (this.formStep2.value.gender != null && this.formStep2.value.gender != undefined) {
+      formData.append('gender', this.genderSelected);
     }
     if (cityId != null && cityId != undefined && cityId != undefined) {
       formData.append('city_id', cityId);
@@ -418,10 +455,8 @@ export class FormComponent implements OnInit {
       formData.append('places_of_interest', JSON.stringify(places_of_interest));
     }
     if (places_visited != null && places_visited != undefined && places_visited != undefined && places_visited.length > 0) {
-      console.log(places_visited);
       formData.append('places_visited', JSON.stringify(places_visited));
     }
-    formData.append('gender', 'O');
     formData.append('city_id_to_visit', city_id_to_visit);//+
     formData.append('companions', companions);//+
 

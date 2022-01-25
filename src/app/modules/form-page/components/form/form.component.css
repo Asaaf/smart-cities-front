@@ -53,6 +53,7 @@ h3.subtitle::after {
 
 input#email,
 input#birthdate,
+input#gender,
 input#country,
 input#province,
 input#city,
@@ -139,6 +140,7 @@ input#companions {
     background: white;
 }
 
+.gender-list,
 .countries-list,
 .provinces-list,
 .cities-list,
@@ -157,6 +159,7 @@ input#companions {
     padding: 3px 0px;
 }
 
+.gender-list.hidden,
 .countries-list.hidden,
 .provinces-list.hidden,
 .cities-list.hidden,
@@ -167,6 +170,7 @@ input#companions {
     padding: 0;
 }
 
+.gender-list ul,
 .countries-list ul,
 .provinces-list ul,
 .cities-list ul,
@@ -182,6 +186,7 @@ input#companions {
     align-items: stretch;
 }
 
+li.gender,
 li.country,
 li.province,
 li.city,
